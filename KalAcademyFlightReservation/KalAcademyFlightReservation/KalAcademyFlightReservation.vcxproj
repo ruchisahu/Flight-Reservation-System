@@ -147,8 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="Flight.h" />
+    <ClInclude Include="Location.h" />
+    <ClInclude Include="Passenger.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Ticket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KalAcademyFlightReservation.cpp" />
