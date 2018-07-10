@@ -7,7 +7,7 @@ namespace KalAcademyFlightReservation
 	{
 	public:
 		Passenger() = default;
-		Passenger(const std::string& lastName, const std::string& firstName, const std::string& dateofBirth, const std::string& gender, const std::string& address, const unsigned int phone, const unsigned int ccNumber);
+		Passenger(const unsigned int id, const std::string& lastName, const std::string& firstName, const std::string& dateofBirth, const std::string& gender, const std::string& address, const unsigned int phone, const unsigned int ccNumber);
 		~Passenger();
 
 		void setId(const int id);
