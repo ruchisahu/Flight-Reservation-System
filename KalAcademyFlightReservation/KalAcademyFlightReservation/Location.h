@@ -17,13 +17,13 @@ namespace KalAcademyFlightReservation
 		void setLocation(const std::string& location);
 		const std::string& getLocation() const;
 
-		void addArrivals(const Flight flights[]);
-		const Flight* getArrivals() const;
+		//void addArrivals(const Flight flights[]);
+		//const Flight*& getArrivals() const;
 
 	private:
 		unsigned int id;
 		std::string location;
-		Flight arrivals[]; //will be changing?
+		//Flight arrivals[]; //will be changing?
 	};
 }
 

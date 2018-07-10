@@ -35,13 +35,13 @@ namespace KalAcademyFlightReservation
 		return location;
 	}
 
-	void Location::addArrivals(const Flight flights[])
-	{
-		// will be changing so not set?
-	}
+	//void Location::addArrivals(const Flight flights[])
+	//{
+	//	// will be changing so not set?
+	//}
 
-	const Flight* Location::getArrivals() const
-	{
-		return arrivals;
-	}
+	//const Flight*& Location::getArrivals() const
+	//{
+	//	return arrivals;
+	//}
 }
