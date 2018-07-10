@@ -19,7 +19,8 @@ namespace KalAcademyFlightReservation
 		void setAirline(const std::string& airline);
 		const std::string& getAirline() const;
 
-		void setSeat(const unsigned int capacity);
+		//set single seat, get all seats
+		void setSeat(const unsigned int seatNumber);
 		const bool* getSeats() const;
 
 		void setArrivalTime(const std::string& arrivalTime);

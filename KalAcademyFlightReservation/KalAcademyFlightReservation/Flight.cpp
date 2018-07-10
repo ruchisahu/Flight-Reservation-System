@@ -11,7 +11,6 @@ namespace KalAcademyFlightReservation
 		this->arrivalTime = arrivalTime;
 	}
 
-
 	Flight::~Flight()
 	{
 	}
