@@ -27,9 +27,6 @@
     <ClInclude Include="Flight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Location.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Ticket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,9 +42,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Flight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Location.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Ticket.cpp">
