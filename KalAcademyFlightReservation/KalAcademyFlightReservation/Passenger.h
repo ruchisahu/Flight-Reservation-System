@@ -3,8 +3,5 @@
 
 namespace KalAcademyFlightReservation
 {
-	class Passenger
-	{
 
-	};
 }
