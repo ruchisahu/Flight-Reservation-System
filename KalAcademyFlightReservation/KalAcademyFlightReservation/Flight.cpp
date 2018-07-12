@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-
 #include "Flight.h"
 #include <string>
 using namespace std;
@@ -69,5 +68,4 @@ namespace KalAcademyFlightReservation
 	{
 		return mSeats;
 	}
-
 }
