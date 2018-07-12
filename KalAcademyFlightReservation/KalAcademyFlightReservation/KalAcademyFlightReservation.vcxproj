@@ -147,11 +147,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DataAccess.h" />
+    <ClInclude Include="Flight.h" />
+    <ClInclude Include="Passenger.h" />
+    <ClInclude Include="Seat.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Ticket.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Flight.cpp" />
     <ClCompile Include="KalAcademyFlightReservation.cpp" />
+    <ClCompile Include="Passenger.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
