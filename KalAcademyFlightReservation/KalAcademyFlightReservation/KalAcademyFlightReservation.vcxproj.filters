@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Controllers">
+      <UniqueIdentifier>{bc03238d-a59e-4f62-992c-542af9c10735}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -27,13 +30,10 @@
     <ClInclude Include="Flight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ticket.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DataAccess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SeatDefinition.h">
+    <ClInclude Include="FlightReservation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Seat.h">
@@ -42,7 +42,13 @@
     <ClInclude Include="SeatCategory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FlightReservation.h">
+    <ClInclude Include="SeatDefinition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ticket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -70,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="FlightReservation.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Controllers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
