@@ -23,6 +23,11 @@ namespace KalAcademyFlightReservation
 		return mRowEnd;
 	}
 
+	int SeatDefinition::getCost() const
+	{
+		return mCost;
+	}
+
 	const int SeatDefinition::getSeatsPerAisle() const
 	{
 		return mSeatsPerAisle;

@@ -13,7 +13,6 @@ namespace KalAcademyFlightReservation {
 
 		const int getRowEnd() const;
 
-		void setCost(int cost);
 		int getCost() const;
 
 		const int getSeatsPerAisle() const;

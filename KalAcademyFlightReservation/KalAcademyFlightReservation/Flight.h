@@ -25,8 +25,8 @@ namespace KalAcademyFlightReservation {
 		void setDestination(const std::string& destination);
 		const std::string& getDestination() const;
 
-		void setSeatDefinitions(const std::vector<SeatDefinition>& seats);
-		const std::vector<SeatDefinition>& getSeatDefinitions() const;
+		void setSeatDefinitions(const std::vector<SeatDefinition*>& seats);
+		const std::vector<SeatDefinition*>& getSeatDefinitions() const;
 
 	private:
 		std::string mCompany;
@@ -34,6 +34,6 @@ namespace KalAcademyFlightReservation {
 		std::string mDepartureDateTime;
 		std::string mOrigin;
 		std::string mDestination;
-		std::vector<SeatDefinition> mSeats;
+		std::vector<SeatDefinition*> mSeats;
 	};
 }

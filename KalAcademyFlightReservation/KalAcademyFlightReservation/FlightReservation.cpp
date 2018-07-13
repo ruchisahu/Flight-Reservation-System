@@ -11,24 +11,43 @@ namespace KalAcademyFlightReservation
 	bool FlightReservation::IsSeatAvailable(const int row, const int aisle, SeatCategory seatCategory)
 	{
 		// check if the seat is not already reserved
-		for (vector<Seat>::const_iterator reservedSeat = mReservedSeats.begin(); reservedSeat != mReservedSeats.end(); ++reservedSeat)
+		for (vector<Ticket>::const_iterator ticket = mTickets.begin(); ticket != mTickets.end(); ++ticket)
 		{
-			if ((*reservedSeat).getRow() == row && (*reservedSeat).getAisle() == aisle)
+			const Seat* seat = (*ticket).getSeat();
+			if (seat->getRow() == row && seat->getAisle() == aisle)
 			{
 				return false;
 			}
 		}
 
 		// check that the seat is within plane boundaries
-		vector<SeatDefinition> seatDefinitions = mFlight->getSeatDefinitions();
-		for (vector<SeatDefinition>::const_iterator seatDefinition = seatDefinitions.begin(); seatDefinition != seatDefinitions.end(); ++seatDefinition)
+		SeatDefinition* seatDefinition = getSeatDefinition(row, aisle, seatCategory);
+
+		return seatDefinition != NULL;
+	}
+
+	void FlightReservation::ReserveSeat(const int row, const int aisle, SeatCategory seatCategory, Passenger& passenger)
+	{
+		SeatDefinition* seatDefinition = getSeatDefinition(row, aisle, seatCategory);
+		if (seatDefinition != NULL)
 		{
-			if (row >= (*seatDefinition).getRowStart() && row <= (*seatDefinition).getRowEnd() && aisle <= (*seatDefinition).getSeatsPerAisle() && (*seatDefinition).getSeatCategory() == seatCategory)
+			Seat* seat = new Seat(row, aisle, seatDefinition->getCost(), seatCategory);
+			mTickets.push_back(Ticket(seat, passenger));
+		}
+	}
+
+	SeatDefinition* FlightReservation::getSeatDefinition(const int row, const int aisle, SeatCategory seatCategory) const
+	{
+		vector<SeatDefinition*> seatDefinitions = mFlight->getSeatDefinitions();
+		for (vector<SeatDefinition*>::const_iterator seatDefinition = seatDefinitions.begin(); seatDefinition != seatDefinitions.end(); ++seatDefinition)
+		{
+			if (row >= (*seatDefinition)->getRowStart() && row <= (*seatDefinition)->getRowEnd() && aisle <= (*seatDefinition)->getSeatsPerAisle() && (*seatDefinition)->getSeatCategory() == seatCategory)
 			{
-				return true;
+				return *seatDefinition;
 			}
 		}
 
-		return false;
+		return NULL;
 	}
+
 }

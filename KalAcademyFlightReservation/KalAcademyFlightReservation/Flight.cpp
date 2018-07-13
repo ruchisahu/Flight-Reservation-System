@@ -60,11 +60,11 @@ namespace KalAcademyFlightReservation
 		return mDestination;
 	}
 
-	void Flight::setSeatDefinitions(const std::vector<SeatDefinition>& seats)
+	void Flight::setSeatDefinitions(const std::vector<SeatDefinition*>& seats)
 	{
 		mSeats = seats;
 	}
-	const std::vector<SeatDefinition>& Flight::getSeatDefinitions() const
+	const std::vector<SeatDefinition*>& Flight::getSeatDefinitions() const
 	{
 		return mSeats;
 	}

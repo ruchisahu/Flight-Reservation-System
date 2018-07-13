@@ -6,5 +6,14 @@
 
 namespace KalAcademyFlightReservation
 {
+	Ticket::Ticket(Seat* seat, const Passenger& passenger)
+	{
+		mSeat = seat;
+		mPassenger = passenger;
+	}
 
+	const Seat* Ticket::getSeat() const
+	{
+		return mSeat;
+	}
 }
