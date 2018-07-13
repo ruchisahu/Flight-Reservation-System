@@ -7,7 +7,7 @@ namespace KalAcademyFlightReservation {
 	public:
 		Passenger() = default;
 		Passenger(const std::string& firstName, const std::string& lastName, const std::string& dateOfBirth,
-			const std::string& gender, const std::string& address, const std::string& phone, const std::string& email);
+			const std::string& gender, const std::string& address, const std::string& phone, const std::string& email, const std::string& passportId);
 
 		void setFirstName(const std::string& firstName);
 		const std::string& getFirstName() const;
@@ -30,6 +30,8 @@ namespace KalAcademyFlightReservation {
 		void setEmail(const std::string& email);
 		const std::string& getEmail() const;
 
+		const std::string& getPassportId() const;
+
 	private:
 		std::string mFirstName;
 		std::string mLastName;
@@ -38,6 +40,6 @@ namespace KalAcademyFlightReservation {
 		std::string mAddress;
 		std::string mPhone;
 		std::string mEmail;
-
+		std::string mPassportId;
 	};
 }

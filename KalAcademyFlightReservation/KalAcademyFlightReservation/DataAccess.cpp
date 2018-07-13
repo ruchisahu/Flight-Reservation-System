@@ -56,6 +56,7 @@ namespace KalAcademyFlightReservation
 				flightFile << passenger.getAddress() << ";";
 				flightFile << passenger.getPhone() << ";";
 				flightFile << passenger.getEmail() << ";";
+				flightFile << passenger.getPassportId() << ";";
 				flightFile << "\n";
 			}
 		}
@@ -107,7 +108,7 @@ namespace KalAcademyFlightReservation
 						{
 							if (parts[0] == "TicketPassenger")
 							{
-								Passenger* passenger = new Passenger(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7]);
+								Passenger* passenger = new Passenger(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]);
 								Ticket* ticket = new Ticket(seat, passenger);
 								flight->getTickets().push_back(ticket);
 							}

@@ -7,12 +7,11 @@ using namespace std;
 
 namespace KalAcademyFlightReservation
 {
-	Passenger::Passenger(const string& firstName, const string& lastName, const string& dateOfBirth, const string& gender, const string& address, const string& phone, const string& email)
-
-		: mFirstName(firstName), mLastName(lastName), mDateOfBirth(dateOfBirth), mGender(gender), mAddress(address), mPhone(phone), mEmail(email)
+	Passenger::Passenger(const string& firstName, const string& lastName, const string& dateOfBirth, const string& gender, const string& address, const string& phone, const string& email, const std::string& passportId)
+		: mFirstName(firstName), mLastName(lastName), mDateOfBirth(dateOfBirth), mGender(gender), mAddress(address), mPhone(phone), mEmail(email), mPassportId(passportId)
 	{
 	}
-	
+
 	void Passenger::setFirstName(const string& firstName)
 	{
 		mFirstName = firstName;
@@ -76,5 +75,10 @@ namespace KalAcademyFlightReservation
 	const string& Passenger::getEmail() const
 	{
 		return mEmail;
+	}
+
+	const std::string & Passenger::getPassportId() const
+	{
+		return mPassportId;
 	}
 }
