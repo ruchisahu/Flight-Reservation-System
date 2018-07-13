@@ -32,6 +32,32 @@ namespace KalAcademyFlightReservation
 				flightFile << seatDefinition->getSeatCategory() << ";";
 				flightFile << "\n";
 			}
+
+			for (vector<Ticket*>::iterator ticketIterator = flight->getTickets().begin(); ticketIterator != flight->getTickets().end(); ++ticketIterator)
+			{
+				const Ticket* ticket = *ticketIterator;
+
+				flightFile << "TicketSeat;";
+				const Seat& seat = *(ticket->getSeat());
+
+				flightFile << seat.getRow() << ";";
+				flightFile << seat.getAisle() << ";";
+				flightFile << seat.getCost() << ";";
+				flightFile << seat.getClass() << ";";
+				flightFile << "\n";
+
+				flightFile << "TicketPassenger;";
+				const Passenger& passenger = *(ticket->getPassenger());
+
+				flightFile << passenger.getFirstName() << ";";
+				flightFile << passenger.getLastName() << ";";
+				flightFile << passenger.getDateOfBirth() << ";";
+				flightFile << passenger.getGender() << ";";
+				flightFile << passenger.getAddress() << ";";
+				flightFile << passenger.getPhone() << ";";
+				flightFile << passenger.getEmail() << ";";
+				flightFile << "\n";
+			}
 		}
 
 		flightFile.close();
@@ -45,6 +71,7 @@ namespace KalAcademyFlightReservation
 		if (flightFile.is_open())
 		{
 			Flight* flight = NULL;
+			Seat* seat = NULL;
 			while (getline(flightFile, line))
 			{
 				vector<string> parts = split(line, ';');
@@ -61,9 +88,30 @@ namespace KalAcademyFlightReservation
 						int rowEnd = stoi(parts[2]);
 						int seatsPerAisle = stoi(parts[3]);
 						int cost = stoi(parts[4]);
-						SeatCategory seatCategory = (SeatCategory)(stoi(parts[5]));
-						SeatDefinition* seatDefinition = new SeatDefinition(rowStart, rowEnd, seatsPerAisle, cost, seatCategory);
+						SeatCategory seatClass = (SeatCategory)(stoi(parts[5]));
+						SeatDefinition* seatDefinition = new SeatDefinition(rowStart, rowEnd, seatsPerAisle, cost, seatClass);
 						flight->getSeatDefinitions().push_back(seatDefinition);
+					}
+					else
+					{
+						if (parts[0] == "TicketSeat")
+						{
+							int row = stoi(parts[1]);
+							int aisle = stoi(parts[2]);
+							int cost = stoi(parts[3]);
+							SeatCategory seatClass = (SeatCategory)(stoi(parts[4]));
+
+							seat = new Seat(row, aisle, cost, seatClass);
+						}
+						else
+						{
+							if (parts[0] == "TicketPassenger")
+							{
+								Passenger* passenger = new Passenger(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7]);
+								Ticket* ticket = new Ticket(seat, passenger);
+								flight->getTickets().push_back(ticket);
+							}
+						}
 					}
 				}
 			}

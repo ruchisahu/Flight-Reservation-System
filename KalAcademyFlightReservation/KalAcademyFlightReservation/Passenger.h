@@ -8,8 +8,7 @@ namespace KalAcademyFlightReservation {
 		Passenger() = default;
 		Passenger(const std::string& firstName, const std::string& lastName, const std::string& dateOfBirth,
 			const std::string& gender, const std::string& address, const std::string& phone, const std::string& email);
-		//AddPassanger();
-		//DisplayPassangerInfo() const;
+
 		void setFirstName(const std::string& firstName);
 		const std::string& getFirstName() const;
 

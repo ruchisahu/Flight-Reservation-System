@@ -9,7 +9,7 @@ namespace KalAcademyFlightReservation
 		mRow = row;
 		mAisle = aisle;
 		mCost = cost;
-		mSeatCategory = seatCategory;
+		mSeatClass = seatCategory;
 	}
 
 	const int Seat::getRow() const
@@ -20,5 +20,15 @@ namespace KalAcademyFlightReservation
 	const int Seat::getAisle() const
 	{
 		return mAisle;
+	}
+
+	int Seat::getCost() const
+	{
+		return mCost;
+	}
+
+	SeatCategory Seat::getClass() const
+	{
+		return mSeatClass;
 	}
 }

@@ -2,7 +2,6 @@
 #include <string>
 #include "Seat.h"
 #include "Passenger.h"
-#include "Flight.h"
 
 namespace KalAcademyFlightReservation {
 	class Ticket
@@ -12,6 +11,8 @@ namespace KalAcademyFlightReservation {
 		Ticket(Seat* seat, Passenger* passenger);
 
 		const Seat* getSeat() const;
+
+		const Passenger* getPassenger() const;
 
 	private:
 		Seat* mSeat;

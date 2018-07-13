@@ -8,19 +8,20 @@ namespace KalAcademyFlightReservation {
 	{
 	public:
 		Seat() = default;
-		Seat(const int row, const int aisle, int cost, SeatCategory seatCategory);
+		Seat(const int row, const int aisle, int cost, SeatCategory seatClass);
 			
 		const int getRow() const;
 
 		const int getAisle() const;
 
-		void setCost(int cost);
 		int getCost() const;
+
+		SeatCategory getClass() const;
 
 	private:
 		int mRow;
 		int mAisle;
 		int mCost;
-		SeatCategory mSeatCategory;
+		SeatCategory mSeatClass;
 	};
 }

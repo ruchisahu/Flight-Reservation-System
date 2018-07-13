@@ -68,4 +68,51 @@ namespace KalAcademyFlightReservation
 	{
 		return mSeats;
 	}
+
+	bool Flight::IsSeatAvailable(const int row, const int aisle, SeatCategory seatCategory)
+	{
+		// check if the seat is not already reserved
+		for (vector<Ticket*>::const_iterator ticket = mTickets.begin(); ticket != mTickets.end(); ++ticket)
+		{
+			const Seat* seat = (*ticket)->getSeat();
+			if (seat->getRow() == row && seat->getAisle() == aisle)
+			{
+				return false;
+			}
+		}
+
+		// check that the seat is within plane boundaries
+		SeatDefinition* seatDefinition = getSeatDefinition(row, aisle, seatCategory);
+
+		return seatDefinition != NULL;
+	}
+
+	void Flight::ReserveSeat(const int row, const int aisle, SeatCategory seatCategory, Passenger* passenger)
+	{
+		SeatDefinition* seatDefinition = getSeatDefinition(row, aisle, seatCategory);
+		if (seatDefinition != NULL)
+		{
+			Seat* seat = new Seat(row, aisle, seatDefinition->getCost(), seatCategory);
+			Ticket* ticket = new Ticket(seat, passenger);
+			mTickets.push_back(ticket);
+		}
+	}
+
+	std::vector<Ticket*>& Flight::getTickets()
+	{
+		return mTickets;
+	}
+
+	SeatDefinition* Flight::getSeatDefinition(const int row, const int aisle, SeatCategory seatCategory) const
+	{
+		for (vector<SeatDefinition*>::const_iterator seatDefinition = mSeats.begin(); seatDefinition != mSeats.end(); ++seatDefinition)
+		{
+			if (row >= (*seatDefinition)->getRowStart() && row <= (*seatDefinition)->getRowEnd() && aisle <= (*seatDefinition)->getSeatsPerAisle() && (*seatDefinition)->getSeatCategory() == seatCategory)
+			{
+				return *seatDefinition;
+			}
+		}
+
+		return NULL;
+	}
 }
