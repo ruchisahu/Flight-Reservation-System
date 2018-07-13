@@ -17,7 +17,7 @@ namespace KalAcademyFlightReservation
 		return mSeat;
 	}
 
-	const Passenger* Ticket::getPassenger() const
+	Passenger* Ticket::getPassenger() const
 	{
 		return mPassenger;
 	}

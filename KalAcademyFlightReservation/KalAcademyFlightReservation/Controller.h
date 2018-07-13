@@ -26,7 +26,7 @@ namespace KalAcademyFlightReservation
 
         // Returns Passenger for the specified PassportId which is unique identifier for a passenger.
         // Returns nullptr if passenger corresponding to specified passportId is not found.
-        Passenger* GetPassengerInformation(int passportId);
+        Passenger* GetPassengerInformation(string passportId);
 
         // Returns Ticket for the specified ticket number.
         // Returns nullptr if ticket corresponding to the specified ticket number is not found.

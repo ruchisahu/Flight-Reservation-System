@@ -3,6 +3,28 @@
 
 namespace KalAcademyFlightReservation
 {
+	Passenger* DataAccess::GetPassengerInformation(string passportId)
+	{
+		vector<Flight*> fligths = ReadFlights(filename);
+
+		for (vector<Flight*>::const_iterator iterator = fligths.begin(); iterator != fligths.end(); ++iterator)
+		{
+			Flight* flight = *iterator;
+
+			for (vector<Ticket*>::iterator ticketIterator = flight->getTickets().begin(); ticketIterator != flight->getTickets().end(); ++ticketIterator)
+			{
+				const Ticket* ticket = *ticketIterator;
+				Passenger* passenger = ticket->getPassenger();
+				if (passenger != NULL && passenger->getPassportId() == passportId)
+				{
+					return passenger;
+				}
+			}
+		}
+
+		return nullptr;
+	}
+
 	void DataAccess::WriteDataToFile(vector<Flight*> const& fligths, string filename)
 	{
 		ofstream flightFile;

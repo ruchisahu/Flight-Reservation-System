@@ -37,7 +37,7 @@ namespace KalAcademyFlightReservation
 
 	// Returns Passenger for the specified PassportId which is unique identifier for a passenger.
 	// Returns nullptr if passenger corresponding to specified passportId is not found.
-	Passenger* Controller::GetPassengerInformation(int passportId)
+	Passenger* Controller::GetPassengerInformation(string passportId)
 	{
 		return dataAccess->GetPassengerInformation(passportId);
 	}

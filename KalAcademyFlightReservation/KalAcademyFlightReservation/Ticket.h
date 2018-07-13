@@ -12,7 +12,7 @@ namespace KalAcademyFlightReservation {
 
 		const Seat* getSeat() const;
 
-		const Passenger* getPassenger() const;
+		Passenger* getPassenger() const;
 
 	private:
 		Seat* mSeat;
