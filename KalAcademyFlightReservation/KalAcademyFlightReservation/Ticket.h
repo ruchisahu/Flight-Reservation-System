@@ -19,5 +19,9 @@ namespace KalAcademyFlightReservation {
 	private:
 		Seat* mSeat;
 		Passenger mPassenger;
+
+		// ToDo:
+		// destructor to delete the Seat because the seat belongs only to a ticket
+		// change mPassenger to be a pointer. Who's going to delete it ?
 	};
 }

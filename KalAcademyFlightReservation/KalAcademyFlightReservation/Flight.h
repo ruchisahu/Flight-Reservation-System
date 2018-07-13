@@ -35,5 +35,8 @@ namespace KalAcademyFlightReservation {
 		std::string mOrigin;
 		std::string mDestination;
 		std::vector<SeatDefinition*> mSeats;
+
+		// ToDo:
+		// destructor to delete each SeatDefinition because it belongs to a flight
 	};
 }

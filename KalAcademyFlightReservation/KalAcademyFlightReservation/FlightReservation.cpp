@@ -26,13 +26,13 @@ namespace KalAcademyFlightReservation
 		return seatDefinition != NULL;
 	}
 
-	void FlightReservation::ReserveSeat(const int row, const int aisle, SeatCategory seatCategory, Passenger& passenger)
+	void FlightReservation::ReserveSeat(const int row, const int aisle, SeatCategory seatCategory, Passenger* passenger)
 	{
 		SeatDefinition* seatDefinition = getSeatDefinition(row, aisle, seatCategory);
 		if (seatDefinition != NULL)
 		{
 			Seat* seat = new Seat(row, aisle, seatDefinition->getCost(), seatCategory);
-			mTickets.push_back(Ticket(seat, passenger));
+			mTickets.push_back(Ticket(seat, *passenger));
 		}
 	}
 
