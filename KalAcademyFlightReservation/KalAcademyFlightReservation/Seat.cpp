@@ -4,11 +4,21 @@
 
 namespace KalAcademyFlightReservation
 {
-	Seat::Seat(const int rowStart, const int rowEnd, int cost, SeatCategory seatCategory)
+	Seat::Seat(const int row, const int aisle, int cost, SeatCategory seatCategory)
 	{
-		mRowStart = rowStart;
-		mRowEnd = rowEnd;
+		mRow = row;
+		mAisle = aisle;
 		mCost = cost;
 		mSeatCategory = seatCategory;
+	}
+
+	const int Seat::getRow() const
+	{
+		return mRow;
+	}
+
+	const int Seat::getAisle() const
+	{
+		return mAisle;
 	}
 }

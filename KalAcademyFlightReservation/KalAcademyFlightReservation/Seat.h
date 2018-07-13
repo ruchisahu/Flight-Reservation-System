@@ -1,32 +1,26 @@
 #pragma once
 #include <string>
+#include "SeatCategory.h"
 
 namespace KalAcademyFlightReservation {
 
-	enum SeatCategory
-	{
-		Economy = 1, Business = 2
-	};
 	class Seat
 	{
 	public:
 		Seat() = default;
-		Seat(const int rowStart, const int rowEnd, int cost, SeatCategory seatCategory);
+		Seat(const int row, const int aisle, int cost, SeatCategory seatCategory);
 			
-		void setRowStart(const int rowStart);
-		const int getRowStart() const;
+		const int getRow() const;
 
-		void setRowEnd(const int rowEnd);
-		const int getRowEnd() const;
+		const int getAisle() const;
 
 		void setCost(int cost);
 		int getCost() const;
 
 	private:
-		int mRowStart;
-		int mRowEnd;
+		int mRow;
+		int mAisle;
 		int mCost;
 		SeatCategory mSeatCategory;
-
 	};
 }
