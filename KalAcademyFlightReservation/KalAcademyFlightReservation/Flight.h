@@ -1,5 +1,6 @@
 #pragma once
 #include "Seat.h"
+#include <vector>
 
 namespace KalAcademyFlightReservation {
 	class Flight
@@ -25,8 +26,8 @@ namespace KalAcademyFlightReservation {
 		void setDestination(const std::string& destination);
 		const std::string& getDestination() const;
 
-		void setSeats(const std::list<Seat>& seats);
-		const std::list<Seat>& getSeats() const;
+		void setSeats(const std::vector<Seat>& seats);
+		const std::vector<Seat>& getSeats() const;
 		
 	private:
 		std::string mCompany;
@@ -34,6 +35,6 @@ namespace KalAcademyFlightReservation {
 		std::string mDepartureDateTime;
 		std::string mOrigin;
 		std::string mDestination;
-		std::list<Seat> mSeats;
+		std::vector<Seat> mSeats;
 	};
 }

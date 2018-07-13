@@ -9,12 +9,12 @@ namespace KalAcademyFlightReservation
 	{
 	public:
 
-		void AddFlights(list<Flight>& fligths)
+		void AddFlights(vector<Flight>& fligths)
 		{
 			ofstream flightFile;
 			flightFile.open("flights.txt");
 
-			for (list<Flight>::const_iterator iterator = fligths.begin(); iterator != fligths.end(); ++iterator)
+			for (vector<Flight>::const_iterator iterator = fligths.begin(); iterator != fligths.end(); ++iterator)
 			{
 				flightFile << (*iterator).getCompany();
 				flightFile << ";";
@@ -31,9 +31,9 @@ namespace KalAcademyFlightReservation
 			flightFile.close();
 		}
 
-		list<Flight> ReadFlights()
+		vector<Flight> ReadFlights()
 		{
-			list<Flight> flights;
+			vector<Flight> flights;
 			string line;
 			ifstream flightFile("flights.txt");
 			if (flightFile.is_open())
