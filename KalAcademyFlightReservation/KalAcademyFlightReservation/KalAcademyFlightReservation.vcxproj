@@ -159,6 +159,7 @@
     <ClCompile Include="Flight.cpp" />
     <ClCompile Include="KalAcademyFlightReservation.cpp" />
     <ClCompile Include="Passenger.cpp" />
+    <ClCompile Include="Seat.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

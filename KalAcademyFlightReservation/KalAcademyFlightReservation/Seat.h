@@ -11,7 +11,7 @@ namespace KalAcademyFlightReservation {
 	{
 	public:
 		Seat() = default;
-		Seat(const int rowStart, const int rowEnd, int cost, enum seatCategory);
+		Seat(const int rowStart, const int rowEnd, int cost, SeatCategory seatCategory);
 			
 		void setRowStart(const int rowStart);
 		const int getRowStart() const;
@@ -26,7 +26,7 @@ namespace KalAcademyFlightReservation {
 		int mRowStart;
 		int mRowEnd;
 		int mCost;
-		
+		SeatCategory mSeatCategory;
 
 	};
 }

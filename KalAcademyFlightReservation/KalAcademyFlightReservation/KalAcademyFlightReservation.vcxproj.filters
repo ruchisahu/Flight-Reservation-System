@@ -50,5 +50,11 @@
     <ClCompile Include="Flight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ticket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Seat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
