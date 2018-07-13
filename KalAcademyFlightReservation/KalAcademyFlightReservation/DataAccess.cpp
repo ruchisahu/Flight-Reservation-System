@@ -3,11 +3,22 @@
 
 namespace KalAcademyFlightReservation
 {
+	DataAccess::DataAccess()
+	{
+		if (fileExists())
+		{
+			mFlights = ReadFlights();
+		}
+	}
+
+	std::vector<Flight*>& DataAccess::getFlights()
+	{
+		return mFlights;
+	}
+
 	Passenger* DataAccess::GetPassengerInformation(string passportId)
 	{
-		vector<Flight*> fligths = ReadFlights(filename);
-
-		for (vector<Flight*>::const_iterator iterator = fligths.begin(); iterator != fligths.end(); ++iterator)
+		for (vector<Flight*>::const_iterator iterator = mFlights.begin(); iterator != mFlights.end(); ++iterator)
 		{
 			Flight* flight = *iterator;
 
@@ -25,12 +36,12 @@ namespace KalAcademyFlightReservation
 		return nullptr;
 	}
 
-	void DataAccess::WriteDataToFile(vector<Flight*> const& fligths, string filename)
+	void DataAccess::SaveFlights()
 	{
 		ofstream flightFile;
 		flightFile.open(filename);
 
-		for (vector<Flight*>::const_iterator iterator = fligths.begin(); iterator != fligths.end(); ++iterator)
+		for (vector<Flight*>::const_iterator iterator = mFlights.begin(); iterator != mFlights.end(); ++iterator)
 		{
 			Flight* flight = *iterator;
 
@@ -86,7 +97,7 @@ namespace KalAcademyFlightReservation
 		flightFile.close();
 	}
 
-	vector<Flight*> DataAccess::ReadFlights(string filename)
+	vector<Flight*> DataAccess::ReadFlights()
 	{
 		vector<Flight*> flights;
 		string line;
@@ -164,5 +175,11 @@ namespace KalAcademyFlightReservation
 			}
 		}
 		return result;
+	}
+
+	bool DataAccess::fileExists()
+	{
+		ifstream file(filename);
+		return file.good();
 	}
 }

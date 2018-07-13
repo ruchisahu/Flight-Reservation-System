@@ -11,6 +11,8 @@ namespace KalAcademyFlightReservation
 	{
 	public:
 
+		DataAccess();
+
 		// Returns list of one-way Flight objects that match the specified search criteria {origin, destination and date}.
 		std::vector<Flight> GetFlightSchedule(std::string origin, std::string destination, tm date)
 		{
@@ -35,14 +37,20 @@ namespace KalAcademyFlightReservation
 			return nullptr;
 		}
 
-		void WriteDataToFile(vector<Flight*> const& fligths, string filename);
-		vector<Flight*> ReadFlights(string filename);
+		void SaveFlights();
+
+		std::vector<Flight*>& getFlights();
 
 	private:
 
-		vector<string> split(const string& str, const char& delim);
-
 		const string filename = "flights.txt";
 
+		vector<Flight*> mFlights;
+
+		vector<string> split(const string& str, const char& delim);
+
+		bool fileExists();
+
+		vector<Flight*> ReadFlights();
 	};
 }
