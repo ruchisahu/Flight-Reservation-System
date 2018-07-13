@@ -18,6 +18,8 @@ namespace KalAcademyFlightReservation {
 
 		const int getSeatsPerAisle() const;
 
+		const SeatCategory getSeatCategory() const;
+
 	private:
 		int mRowStart;
 		int mRowEnd;

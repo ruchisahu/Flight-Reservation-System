@@ -27,4 +27,9 @@ namespace KalAcademyFlightReservation
 	{
 		return mSeatsPerAisle;
 	}
+
+	const SeatCategory SeatDefinition::getSeatCategory() const
+	{
+		return mSeatCategory;
+	}
 }
