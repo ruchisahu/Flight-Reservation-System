@@ -33,9 +33,6 @@
     <ClInclude Include="DataAccess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FlightReservation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Seat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,9 +69,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Seat.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FlightReservation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controller.cpp">

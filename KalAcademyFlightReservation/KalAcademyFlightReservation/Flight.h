@@ -1,6 +1,7 @@
 #pragma once
 #include "SeatDefinition.h"
 #include "Seat.h"
+#include "Ticket.h"
 #include <vector>
 
 namespace KalAcademyFlightReservation {
@@ -28,6 +29,11 @@ namespace KalAcademyFlightReservation {
 		void setSeatDefinitions(const std::vector<SeatDefinition*>& seats);
 		std::vector<SeatDefinition*>& getSeatDefinitions();
 
+		bool IsSeatAvailable(const int row, const int aisle, SeatCategory seatCategory);
+		void ReserveSeat(const int row, const int aisle, SeatCategory seatCategory, Passenger* passenger);
+
+		std::vector<Ticket*>& getTickets();
+
 	private:
 		std::string mCompany;
 		std::string mArrivalDateTime;
@@ -35,6 +41,9 @@ namespace KalAcademyFlightReservation {
 		std::string mOrigin;
 		std::string mDestination;
 		std::vector<SeatDefinition*> mSeats;
+		vector<Ticket*> mTickets;
+
+		SeatDefinition* getSeatDefinition(const int row, const int aisle, SeatCategory seatCategory) const;
 
 		// ToDo:
 		// destructor to delete each SeatDefinition because it belongs to a flight

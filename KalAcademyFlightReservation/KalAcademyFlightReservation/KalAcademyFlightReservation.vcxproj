@@ -150,7 +150,6 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DataAccess.h" />
     <ClInclude Include="Flight.h" />
-    <ClInclude Include="FlightReservation.h" />
     <ClInclude Include="Passenger.h" />
     <ClInclude Include="Seat.h" />
     <ClInclude Include="SeatCategory.h" />
@@ -163,7 +162,6 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DataAccess.cpp" />
     <ClCompile Include="Flight.cpp" />
-    <ClCompile Include="FlightReservation.cpp" />
     <ClCompile Include="KalAcademyFlightReservation.cpp" />
     <ClCompile Include="Passenger.cpp" />
     <ClCompile Include="Seat.cpp" />
