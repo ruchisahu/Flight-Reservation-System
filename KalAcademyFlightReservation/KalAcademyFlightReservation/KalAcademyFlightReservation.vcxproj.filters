@@ -80,5 +80,8 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="DataAccess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

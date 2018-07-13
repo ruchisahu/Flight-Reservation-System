@@ -1,1 +1,3 @@
-Delta Airline;7/13/2018 8:00:00;7/13/2018 12:00:00;NY;Dallas
+Flight;Delta Airline;7/13/2018 8:00:00;7/13/2018 12:00:00;NY;Dallas;
+SeatDefinition;1;10;5;100;2;
+SeatDefinition;11;30;5;10;1;

@@ -32,7 +32,7 @@ namespace KalAcademyFlightReservation
 		if (seatDefinition != NULL)
 		{
 			Seat* seat = new Seat(row, aisle, seatDefinition->getCost(), seatCategory);
-			mTickets.push_back(Ticket(seat, *passenger));
+			mTickets.push_back(Ticket(seat, passenger));
 		}
 	}
 
