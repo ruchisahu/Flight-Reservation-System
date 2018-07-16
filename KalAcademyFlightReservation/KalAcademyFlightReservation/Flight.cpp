@@ -80,7 +80,7 @@ namespace KalAcademyFlightReservation
 		return mSeats;
 	}
 
-	bool Flight::IsSeatAvailable(const int row, const int aisle, SeatCategory seatCategory)
+	SeatDefinition* Flight::IsSeatAvailable(int row, int aisle, SeatCategory seatCategory) const
 	{
 		// check if the seat is not already reserved
 		for (vector<Ticket*>::const_iterator ticket = mTickets.begin(); ticket != mTickets.end(); ++ticket)
@@ -95,18 +95,37 @@ namespace KalAcademyFlightReservation
 		// check that the seat is within plane boundaries
 		SeatDefinition* seatDefinition = getSeatDefinition(row, aisle, seatCategory);
 
-		return seatDefinition != NULL;
+		return seatDefinition;
 	}
 
-	void Flight::ReserveSeat(const int row, const int aisle, SeatCategory seatCategory, Passenger* passenger)
+	Ticket* Flight::ReserveSeat(SeatCategory seatCategory, Passenger* passenger)
 	{
-		SeatDefinition* seatDefinition = getSeatDefinition(row, aisle, seatCategory);
-		if (seatDefinition != NULL)
+		for (vector<SeatDefinition*>::const_iterator seatDefinition = mSeats.begin(); seatDefinition != mSeats.end(); ++seatDefinition)
 		{
-			Seat* seat = new Seat(row, aisle, seatDefinition->getCost(), seatCategory);
-			Ticket* ticket = new Ticket(seat, passenger);
-			mTickets.push_back(ticket);
+			if ((*seatDefinition)->getSeatCategory() == seatCategory)
+			{
+				int firstRow = (*seatDefinition)->getRowStart();
+				int lastRow = (*seatDefinition)->getRowEnd();
+				int numberOfSeatsRow = (*seatDefinition)->getSeatsPerAisle();
+				for (int row = firstRow; row <= lastRow; row++)
+				{
+					for (int col = 1; col <= numberOfSeatsRow; col++)
+					{
+						SeatDefinition* seatDefinition = IsSeatAvailable(row, col, seatCategory);
+
+						if (seatDefinition != NULL)
+						{
+							Seat* seat = new Seat(row, col, seatDefinition->getCost(), seatCategory);
+							Ticket* ticket = new Ticket(seat, passenger);
+							mTickets.push_back(ticket);
+							return ticket;
+						}
+					}
+				}
+			}
 		}
+
+		return NULL;
 	}
 
 	std::vector<Ticket*>& Flight::getTickets()

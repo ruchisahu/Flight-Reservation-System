@@ -10,7 +10,7 @@ namespace KalAcademyFlightReservation {
 	public:
 		Flight() = default;
 		Flight(const std::string& flightNumber, const std::string& company, const std::string& departureDateTime, const std::string& arrivalDateTime, const std::string& origin, const std::string& destination);
-		
+
 		void setFlightNumber(const std::string& flightNr);
 		const std::string& getFlightNumber() const;
 
@@ -18,22 +18,22 @@ namespace KalAcademyFlightReservation {
 		const std::string& getCompany() const;
 
 		void setArrivalDateTime(const std::string& arrivalTime);
-		const std::string& getArrivalDateTime() const ;
+		const std::string& getArrivalDateTime() const;
 
 		void setDepartureDateTime(const std::string& departureTime);
 		const std::string& getDepartureDateTime() const;
 
 		void setOrigin(const std::string& origin);
 		const std::string& getOrigin() const;
-		
+
 		void setDestination(const std::string& destination);
 		const std::string& getDestination() const;
 
 		void setSeatDefinitions(const std::vector<SeatDefinition*>& seats);
 		std::vector<SeatDefinition*>& getSeatDefinitions();
 
-		bool IsSeatAvailable(const int row, const int aisle, SeatCategory seatCategory);
-		void ReserveSeat(const int row, const int aisle, SeatCategory seatCategory, Passenger* passenger);
+		SeatDefinition* IsSeatAvailable(int row, int aisle, SeatCategory seatCategory) const;
+		Ticket* ReserveSeat(SeatCategory seatCategory, Passenger* passenger);
 
 		std::vector<Ticket*>& getTickets();
 

@@ -75,7 +75,7 @@ void TestDataAccess()
 	if (isSeatAvailable)
 	{
 		Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
-		flight->ReserveSeat(1, 1, SeatCategory::Business, passenger);
+		flight->ReserveSeat(SeatCategory::Business, passenger);
 	}
 	isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
 
@@ -84,7 +84,7 @@ void TestDataAccess()
 	if (isSeatAvailable)
 	{
 		Passenger* passenger = new Passenger("firstName2", "lastName2", "dateOfBirth2", "gender2", "address2", "phone2", "email2", "222");
-		flight->ReserveSeat(11, 2, SeatCategory::Economy, passenger);
+		flight->ReserveSeat(SeatCategory::Economy, passenger);
 	}
 	isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
 
@@ -98,8 +98,6 @@ void TestDataAccess()
 
 int main()
 {
-
-	TestDataAccess();
 	HANDLE  hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	int k = 3;               //color number
@@ -264,16 +262,24 @@ void UserRegistration()
 	else
 	{
 		cout << "  USERNAME AND PASSPORT SET." << endl;
-		vector<SeatDefinition*> seatDefinitions;
-		seatDefinitions.push_back(new SeatDefinition(1, 10, 5, 100, SeatCategory::Business));
-		seatDefinitions.push_back(new SeatDefinition(11, 30, 5, 10, SeatCategory::Economy));
-		flight->setSeatDefinitions(seatDefinitions);
-
-		dataAccess.SaveFlights();
+		//vector<SeatDefinition*> seatDefinitions;
+		//seatDefinitions.push_back(new SeatDefinition(1, 10, 5, 100, SeatCategory::Business));
+		//seatDefinitions.push_back(new SeatDefinition(11, 30, 5, 10, SeatCategory::Economy));
+		//flight->setSeatDefinitions(seatDefinitions);
+		//dataAccess.SaveFlights();
 
 		Passenger* passenger = new Passenger(Fname, Lname, dateOfBirth, gender, address, phone, email, passportId);
-		flight->ReserveSeat(1, 1, SeatCategory::Business, passenger);
-		dataAccess.SaveFlights();
+		Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger);
+		//check if the reservation was made - if the flight is null then there are no more seats available, and ticket will be null
+		if (ticket == NULL)
+		{
+			delete passenger;
+			// ToDo : how to write that the plane is full. This can be checked before asking the passenger for details
+		}
+		else
+		{
+			dataAccess.SaveFlights();
+		}
 		Sleep(4);
 		system("cls");
 		menu();
