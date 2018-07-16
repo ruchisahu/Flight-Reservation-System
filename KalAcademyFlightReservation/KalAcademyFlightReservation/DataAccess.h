@@ -14,7 +14,7 @@ namespace KalAcademyFlightReservation
 		DataAccess();
 
 		// Returns list of one-way Flight objects that match the specified search criteria {origin, destination and date}.
-		std::vector<Flight> GetFlightSchedule(std::string origin, std::string destination, tm date)
+		std::vector<Flight> GetFlightSchedule(std::string origin, std::string destination, string date)
 		{
 			return vector<Flight>();
 		}
