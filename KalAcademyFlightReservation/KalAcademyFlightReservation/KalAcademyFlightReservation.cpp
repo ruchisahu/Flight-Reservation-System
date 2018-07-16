@@ -235,7 +235,7 @@ void UserRegistration()
 	string Fname, Lname;
 	string passportId;
 	int phoneno;
-	Flight* flight = new Flight("Delta Airline", "7/13/2018 8:00:00", "7/13/2018 12:00:00", "NY", "Dallas");
+	Flight* flight = new Flight("DL111", "Delta Airline", "7/13/2018 8:00:00", "7/13/2018 12:00:00", "NY", "Dallas");
 	flights.push_back(flight);
 
 	cout << " Please enter user First name - " << endl;
@@ -380,6 +380,6 @@ void Exit()
 
 
 
-	
-	  
-		
+
+
+
