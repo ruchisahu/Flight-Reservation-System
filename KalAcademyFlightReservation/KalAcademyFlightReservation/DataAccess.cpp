@@ -46,6 +46,7 @@ namespace KalAcademyFlightReservation
 			Flight* flight = *iterator;
 
 			flightFile << "Flight;";
+			flightFile << flight->getFlightNumber() << ";";
 			flightFile << flight->getCompany() << ";";
 			flightFile << flight->getDepartureDateTime() << ";";
 			flightFile << flight->getArrivalDateTime() << ";";
@@ -111,7 +112,7 @@ namespace KalAcademyFlightReservation
 				vector<string> parts = split(line, ';');
 				if (parts[0] == "Flight")
 				{
-					flight = new Flight(parts[1], parts[2], parts[3], parts[4], parts[5]);
+					flight = new Flight(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
 					flights.push_back(flight);
 				}
 				else

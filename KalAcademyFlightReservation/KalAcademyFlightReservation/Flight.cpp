@@ -6,13 +6,24 @@ using namespace std;
 
 namespace KalAcademyFlightReservation
 {
-	Flight::Flight(const string& company, const string& departureDateTime, const string& arrivalDateTime, const string& origin, const string& destination)
+	Flight::Flight(const string& flightnumber, const string& company, const string& departureDateTime, const string& arrivalDateTime, const string& origin, const string& destination)
 	{
+		mFlightNumber = flightnumber;
 		mCompany = company;
 		mDepartureDateTime = departureDateTime;
 		mArrivalDateTime = arrivalDateTime;
 		mOrigin = origin;
 		mDestination = destination;
+	}
+
+	void Flight::setFlightNumber(const string& flightnumber)
+	{
+		mFlightNumber = flightnumber;
+	}
+
+	const string& Flight::getFlightNumber() const
+	{
+		return mFlightNumber;
 	}
 
 	void Flight::setCompany(const string& company)

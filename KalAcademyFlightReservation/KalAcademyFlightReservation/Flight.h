@@ -9,8 +9,11 @@ namespace KalAcademyFlightReservation {
 	{
 	public:
 		Flight() = default;
-		Flight(const std::string& company, const std::string& departureDateTime, const std::string& arrivalDateTime, const std::string& origin, const std::string& destination);
+		Flight(const std::string& flightNumber, const std::string& company, const std::string& departureDateTime, const std::string& arrivalDateTime, const std::string& origin, const std::string& destination);
 		
+		void setFlightNumber(const std::string& flightNr);
+		const std::string& getFlightNumber() const;
+
 		void setCompany(const std::string& company);
 		const std::string& getCompany() const;
 
@@ -35,6 +38,7 @@ namespace KalAcademyFlightReservation {
 		std::vector<Ticket*>& getTickets();
 
 	private:
+		std::string mFlightNumber;
 		std::string mCompany;
 		std::string mArrivalDateTime;
 		std::string mDepartureDateTime;
