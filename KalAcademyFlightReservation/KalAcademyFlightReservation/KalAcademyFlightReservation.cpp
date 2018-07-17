@@ -37,7 +37,7 @@ vector<Flight*>& flights = dataAccess.getFlights();
 //Set position on screen
 string ToUpperCase(string text)
 {
-	for (int i = 0; i<text.length(); i++) {
+	for (int i = 0; i < text.length(); i++) {
 		char c = text[i];
 		if ((c >= 97) && (c <= 122)) {
 			text[i] &= 0xdf;
@@ -59,11 +59,11 @@ void date_times()
 	GetLocalTime(&t);
 
 	aday = t.wDay, amonth = t.wMonth, ayear = t.wYear, ahour = t.wHour, amin = t.wMinute, asec = t.wSecond;
-	
-		cout << aday << ":" << amonth << ":" << ayear << ":" << ahour << ":" << amin << ":" << asec << endl;
-	
-	
-	}
+
+	cout << aday << ":" << amonth << ":" << ayear << ":" << ahour << ":" << amin << ":" << asec << endl;
+
+
+}
 
 
 //test dataset
@@ -73,45 +73,79 @@ void TestDataAccess()
 	DataAccess dataAccess;
 	vector<Flight*>& flights = dataAccess.getFlights();
 
-	//flights.clear();
+	// how to reserve a seat
+	// find the flights based on origin, destination and time to leave
+	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/17/2018 8:00:00");
 
-	Flight* flight = new Flight("123D", "Delta Airline", "7/13/2018 8:00:00", "7/13/2018 12:00:00", "NY", "Dallas");
-	flights.push_back(flight);
-
-	vector<SeatDefinition*> seatDefinitions;
-	seatDefinitions.push_back(new SeatDefinition(1, 10, 5, 100, SeatCategory::Business));
-	seatDefinitions.push_back(new SeatDefinition(11, 30, 5, 10, SeatCategory::Economy));
-	flight->setSeatDefinitions(seatDefinitions);
-
-	dataAccess.SaveFlights();
-
-	bool isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
-	if (isSeatAvailable)
+	// check if there are flights
+	if (myFlights.size() > 0)
 	{
-		Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
-		flight->ReserveSeat(SeatCategory::Business, passenger);
-	}
-	isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
+		// pick a flight based on cost, probably
+		Flight* pickedFlight = myFlights[0];
+		// check if there are any seats available
+		if (pickedFlight->AreAnySeatsAvailable(SeatCategory::Business))
+		{
+			// create the passenger
+			Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
 
-	isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Economy);
-	isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
-	if (isSeatAvailable)
+			// reserve next seat
+			pickedFlight->ReserveSeat(SeatCategory::Business, passenger);
+
+			// save the changes
+			dataAccess.SaveFlights();
+		}
+	}
+
+	// testing - test that AreAnySeatsAvailable it's working by reserving all seats until plane is full
+	myFlights = dataAccess.GetFlightSchedule("Sea", "Paris", "7/17/2018 8:00:00");
+	if (myFlights.size() > 0)
 	{
-		Passenger* passenger = new Passenger("firstName2", "lastName2", "dateOfBirth2", "gender2", "address2", "phone2", "email2", "222");
-		flight->ReserveSeat(SeatCategory::Economy, passenger);
+		Flight* pickedFlight = myFlights[0];
+
+		while(pickedFlight->AreAnySeatsAvailable(SeatCategory::Business))
+		{
+			// create the passenger
+			Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
+
+			// reserve next seat
+			pickedFlight->ReserveSeat(SeatCategory::Business, passenger);
+		}
+
+		// save the changes
+		dataAccess.SaveFlights();
 	}
-	isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
 
-	isSeatAvailable = flight->IsSeatAvailable(31, 1, SeatCategory::Economy);
 
-	dataAccess.SaveFlights();
+	//bool isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
+	//if (isSeatAvailable)
+	//{
+	//	Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
+	//	flight->ReserveSeat(SeatCategory::Business, passenger, "Ticket 1");
+	//}
+	//isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
 
-	Passenger* passenger = dataAccess.GetPassengerInformation("passportId1");
-	passenger = dataAccess.GetPassengerInformation("passportId111");
+	//isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Economy);
+	//isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
+	//if (isSeatAvailable)
+	//{
+	//	Passenger* passenger = new Passenger("firstName2", "lastName2", "dateOfBirth2", "gender2", "address2", "phone2", "email2", "222");
+	//	flight->ReserveSeat(SeatCategory::Economy, passenger, "Ticket 2");
+	//}
+	//isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
+
+	//isSeatAvailable = flight->IsSeatAvailable(31, 1, SeatCategory::Economy);
+
+	//dataAccess.SaveFlights();
+
+	//Passenger* passenger = dataAccess.GetPassengerInformation("passportId1");
+	//passenger = dataAccess.GetPassengerInformation("passportId111");
 }
 
 int main()
 {
+	//TestDataAccess();
+	//return 1;
+
 	HANDLE  hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	int k = 3;               //color number
@@ -189,13 +223,13 @@ void Reserve()
 	system("cls");
 	gotoxy(40, 5);
 	cout << "Book a Flight \n\n" << endl;
-	cout << "NOTE: Available Options(NY,Dallas,SEA,Paris) \n\n" ;
+	cout << "NOTE: Available Options(NY,Dallas,SEA,Paris) \n\n";
 
 	cout << "Enter valid origin:";
 	cin >> origin;
 	origin = ToUpperCase(origin);
 
-	while ((origin != "NY") && (origin != "DALLAS") && (origin != "SEA") &&(origin != "PARIS"))
+	while ((origin != "NY") && (origin != "DALLAS") && (origin != "SEA") && (origin != "PARIS"))
 	{
 
 		cout << "invalid origin Enter again:" << endl;
@@ -204,7 +238,7 @@ void Reserve()
 
 	cout << " Please enter destination - " << endl;
 	cin >> destination;
-	destination=ToUpperCase(destination);
+	destination = ToUpperCase(destination);
 	while ((destination != "NY") && (destination != "DALLAS") && (destination != "SEA") && (destination != "PARIS"))
 	{
 		cout << "invalid destination Enter again:" << endl;
@@ -216,7 +250,7 @@ void Reserve()
 	//	cin >> traveler;
 	cout << " Please enter class: Choose between  Business and Economy " << endl;
 	cin >> class1;
-	class1=ToUpperCase(class1);
+	class1 = ToUpperCase(class1);
 	while ((class1 != "BUSINESS") && (class1 != "ECONOMY"))
 	{
 
@@ -315,7 +349,7 @@ void flightSchedule()
 	cin >> origin;
 	cout << "Enter Destination" << endl;
 	cin >> destination;
-	cout << "Enter valid date\n(format: mm/dd/yyy for example 7/13/2018)"<<endl;
+	cout << "Enter valid date\n(format: mm/dd/yyy for example 7/13/2018)" << endl;
 	cin >> date;
 	cout << "list of all flights \n";
 	//std::vector<Flight> result = controller.GetFlightSchedule(origin, destination, date);
@@ -429,6 +463,7 @@ void Exit()
 
 	flag = false;
 	exit(0);
+<<<<<<< HEAD
 	
 
 }
@@ -438,3 +473,6 @@ void Exit()
 
 
 
+=======
+}
+>>>>>>> 1f7b876f99f1862e84b4c73c51bda44facb317e4

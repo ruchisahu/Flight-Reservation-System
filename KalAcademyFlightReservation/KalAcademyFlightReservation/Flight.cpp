@@ -98,6 +98,34 @@ namespace KalAcademyFlightReservation
 		return seatDefinition;
 	}
 
+	bool Flight::AreAnySeatsAvailable(SeatCategory seatCategory)
+	{
+
+		for (vector<SeatDefinition*>::const_iterator seatDefinition = mSeats.begin(); seatDefinition != mSeats.end(); ++seatDefinition)
+		{
+			if ((*seatDefinition)->getSeatCategory() == seatCategory)
+			{
+				int firstRow = (*seatDefinition)->getRowStart();
+				int lastRow = (*seatDefinition)->getRowEnd();
+				int numberOfSeatsRow = (*seatDefinition)->getSeatsPerAisle();
+				for (int row = firstRow; row <= lastRow; row++)
+				{
+					for (int col = 1; col <= numberOfSeatsRow; col++)
+					{
+						SeatDefinition* seatDefinition = IsSeatAvailable(row, col, seatCategory);
+
+						if (seatDefinition != NULL)
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
 	Ticket* Flight::ReserveSeat(SeatCategory seatCategory, Passenger* passenger)
 	{
 		for (vector<SeatDefinition*>::const_iterator seatDefinition = mSeats.begin(); seatDefinition != mSeats.end(); ++seatDefinition)
@@ -116,7 +144,9 @@ namespace KalAcademyFlightReservation
 						if (seatDefinition != NULL)
 						{
 							Seat* seat = new Seat(row, col, seatDefinition->getCost(), seatCategory);
-							Ticket* ticket = new Ticket(seat, passenger);
+							// generate ticket number
+							string ticketNumber = "Ticket number " + to_string((row - 1)* numberOfSeatsRow + col);
+							Ticket* ticket = new Ticket(seat, passenger, ticketNumber);
 							mTickets.push_back(ticket);
 							return ticket;
 						}

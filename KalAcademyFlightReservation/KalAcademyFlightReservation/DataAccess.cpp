@@ -92,6 +92,10 @@ namespace KalAcademyFlightReservation
 				flightFile << passenger.getEmail() << ";";
 				flightFile << passenger.getPassportId() << ";";
 				flightFile << "\n";
+
+				flightFile << "Ticket;";
+				flightFile << (*ticket).getTicketNumber() << ";";
+				flightFile << "\n";
 			}
 		}
 
@@ -107,6 +111,7 @@ namespace KalAcademyFlightReservation
 		{
 			Flight* flight = NULL;
 			Seat* seat = NULL;
+			Passenger* passenger = NULL;
 			while (getline(flightFile, line))
 			{
 				vector<string> parts = split(line, ';');
@@ -142,9 +147,15 @@ namespace KalAcademyFlightReservation
 						{
 							if (parts[0] == "TicketPassenger")
 							{
-								Passenger* passenger = new Passenger(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]);
-								Ticket* ticket = new Ticket(seat, passenger);
-								flight->getTickets().push_back(ticket);
+								passenger = new Passenger(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]);
+							}
+							else
+							{
+								if (parts[0] == "Ticket")
+								{
+									Ticket* ticket = new Ticket(seat, passenger, parts[1]);
+									flight->getTickets().push_back(ticket);
+								}
 							}
 						}
 					}
@@ -182,5 +193,22 @@ namespace KalAcademyFlightReservation
 	{
 		ifstream file(filename);
 		return file.good();
+	}
+
+	vector<Flight*> DataAccess::GetFlightSchedule(string origin, string destination, string date) const
+	{
+		vector<Flight*> result;
+
+		for (vector<Flight*>::const_iterator iterator = mFlights.begin(); iterator != mFlights.end(); ++iterator)
+		{
+			Flight* flight = *iterator;
+
+			if (_stricmp(flight->getOrigin().c_str(), origin.c_str()) == 0 && _stricmp(flight->getDestination().c_str(), destination.c_str()) == 0 && _stricmp(flight->getDepartureDateTime().c_str(), date.c_str()) == 0)
+			{
+				result.push_back(flight);
+			}
+		}
+
+		return result;
 	}
 }
