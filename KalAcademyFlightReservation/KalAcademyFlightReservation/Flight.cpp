@@ -98,7 +98,7 @@ namespace KalAcademyFlightReservation
 		return seatDefinition;
 	}
 
-	Ticket* Flight::ReserveSeat(SeatCategory seatCategory, Passenger* passenger)
+	Ticket* Flight::ReserveSeat(SeatCategory seatCategory, Passenger* passenger, string ticketNumber)
 	{
 		for (vector<SeatDefinition*>::const_iterator seatDefinition = mSeats.begin(); seatDefinition != mSeats.end(); ++seatDefinition)
 		{
@@ -116,7 +116,7 @@ namespace KalAcademyFlightReservation
 						if (seatDefinition != NULL)
 						{
 							Seat* seat = new Seat(row, col, seatDefinition->getCost(), seatCategory);
-							Ticket* ticket = new Ticket(seat, passenger);
+							Ticket* ticket = new Ticket(seat, passenger, ticketNumber);
 							mTickets.push_back(ticket);
 							return ticket;
 						}

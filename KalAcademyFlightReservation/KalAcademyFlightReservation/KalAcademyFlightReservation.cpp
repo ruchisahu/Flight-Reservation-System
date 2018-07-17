@@ -37,7 +37,7 @@ vector<Flight*>& flights = dataAccess.getFlights();
 //Set position on screen
 string ToUpperCase(string text)
 {
-	for (int i = 0; i<text.length(); i++) {
+	for (int i = 0; i < text.length(); i++) {
 		char c = text[i];
 		if ((c >= 97) && (c <= 122)) {
 			text[i] &= 0xdf;
@@ -59,11 +59,11 @@ void date_times()
 	GetLocalTime(&t);
 
 	aday = t.wDay, amonth = t.wMonth, ayear = t.wYear, ahour = t.wHour, amin = t.wMinute, asec = t.wSecond;
-	
-		cout << aday << ":" << amonth << ":" << ayear << ":" << ahour << ":" << amin << ":" << asec << endl;
-	
-	
-	}
+
+	cout << aday << ":" << amonth << ":" << ayear << ":" << ahour << ":" << amin << ":" << asec << endl;
+
+
+}
 
 
 //test dataset
@@ -89,7 +89,7 @@ void TestDataAccess()
 	if (isSeatAvailable)
 	{
 		Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
-		flight->ReserveSeat(SeatCategory::Business, passenger);
+		flight->ReserveSeat(SeatCategory::Business, passenger, "Ticket 1");
 	}
 	isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
 
@@ -98,7 +98,7 @@ void TestDataAccess()
 	if (isSeatAvailable)
 	{
 		Passenger* passenger = new Passenger("firstName2", "lastName2", "dateOfBirth2", "gender2", "address2", "phone2", "email2", "222");
-		flight->ReserveSeat(SeatCategory::Economy, passenger);
+		flight->ReserveSeat(SeatCategory::Economy, passenger, "Ticket 2");
 	}
 	isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
 
@@ -189,13 +189,13 @@ void Reserve()
 	system("cls");
 	gotoxy(40, 5);
 	cout << "Book a Flight \n\n" << endl;
-	cout << "NOTE: Available Options(NY,Dallas,SEA,Paris) \n\n" ;
+	cout << "NOTE: Available Options(NY,Dallas,SEA,Paris) \n\n";
 
 	cout << "Enter valid origin:";
 	cin >> origin;
 	origin = ToUpperCase(origin);
 
-	while ((origin != "NY") && (origin != "DALLAS") && (origin != "SEA") &&(origin != "PARIS"))
+	while ((origin != "NY") && (origin != "DALLAS") && (origin != "SEA") && (origin != "PARIS"))
 	{
 
 		cout << "invalid origin Enter again:" << endl;
@@ -204,7 +204,7 @@ void Reserve()
 
 	cout << " Please enter destination - " << endl;
 	cin >> destination;
-	destination=ToUpperCase(destination);
+	destination = ToUpperCase(destination);
 	while ((destination != "NY") && (destination != "DALLAS") && (destination != "SEA") && (destination != "PARIS"))
 	{
 		cout << "invalid destination Enter again:" << endl;
@@ -216,7 +216,7 @@ void Reserve()
 	//	cin >> traveler;
 	cout << " Please enter class: Choose between  Business and Economy " << endl;
 	cin >> class1;
-	class1=ToUpperCase(class1);
+	class1 = ToUpperCase(class1);
 	while ((class1 != "BUSINESS") && (class1 != "ECONOMY"))
 	{
 
@@ -288,8 +288,9 @@ void UserRegistration()
 		//flight->setSeatDefinitions(seatDefinitions);
 		//dataAccess.SaveFlights();
 
+		string ticketNumber = "Ticket#";
 		Passenger* passenger = new Passenger(Fname, Lname, dateOfBirth, gender, address, phone, email, passportId);
-		Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger);
+		Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger, ticketNumber);
 		//check if the reservation was made - if the flight is null then there are no more seats available, and ticket will be null
 		if (ticket == NULL)
 		{
@@ -315,7 +316,7 @@ void flightSchedule()
 	cin >> origin;
 	cout << "Enter Destination" << endl;
 	cin >> destination;
-	cout << "Enter valid date\n(format: mm/dd/yyy for example 7/13/2018)"<<endl;
+	cout << "Enter valid date\n(format: mm/dd/yyy for example 7/13/2018)" << endl;
 	cin >> date;
 	cout << "list of all flights \n";
 	//std::vector<Flight> result = controller.GetFlightSchedule(origin, destination, date);
@@ -429,7 +430,7 @@ void Exit()
 
 	flag = false;
 	exit(0);
-	
+
 
 }
 

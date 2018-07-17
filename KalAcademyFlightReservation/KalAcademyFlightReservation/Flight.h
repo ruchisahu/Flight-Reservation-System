@@ -33,7 +33,7 @@ namespace KalAcademyFlightReservation {
 		std::vector<SeatDefinition*>& getSeatDefinitions();
 
 		SeatDefinition* IsSeatAvailable(int row, int aisle, SeatCategory seatCategory) const;
-		Ticket* ReserveSeat(SeatCategory seatCategory, Passenger* passenger);
+		Ticket* ReserveSeat(SeatCategory seatCategory, Passenger* passenger, string ticketNumber);
 
 		std::vector<Ticket*>& getTickets();
 
