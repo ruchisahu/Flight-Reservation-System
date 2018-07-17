@@ -428,6 +428,7 @@ void Exit()
 	Sleep(800);
 
 	flag = false;
+	exit(0);
 	
 
 }
