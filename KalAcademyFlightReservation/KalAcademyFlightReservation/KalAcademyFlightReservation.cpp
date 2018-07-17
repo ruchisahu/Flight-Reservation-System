@@ -15,7 +15,7 @@ using namespace std;
 
 using namespace KalAcademyFlightReservation;
 
-int selection = 0, flightNumber, TicketNo, b;
+int selection = 0, flightNumber, TicketNo, b,num,k;
 string origin;
 string destination, passportId, flight, dateOfBirth, gender, address, phone, email, date;
 
@@ -268,12 +268,12 @@ void Reserve()
 	cin >> op;
 
 
-	if (op == 'Y')
+	if (op == 'Y' || op=='y')
 	{
 		system("cls");
 		UserRegistration();
 	}
-	else if (op == 'N')
+	else if (op == 'N' || op=='n')
 	{
 		menu();
 	}
@@ -345,21 +345,44 @@ void flightSchedule()
 {
 	system("cls");
 	cout << "Flight Schedule:\n\n " << endl;
-	cout << "Enter origin:" << endl;
+	cout << "Example string: NY, Dallas, 7/17/2018 8:00:00" << endl;
+	cout << "Enter origin: " << endl;
 	cin >> origin;
 	cout << "Enter Destination" << endl;
 	cin >> destination;
-	cout << "Enter valid date\n(format: mm/dd/yyy for example 7/13/2018)" << endl;
+	cout << "Enter valid dateTime\n(format: mm/dd/yyy  hh:mm:ss for example 7/17/2018 8:00:00)" << endl;
 	cin >> date;
+	
 	cout << "list of all flights \n";
-	//std::vector<Flight> result = controller.GetFlightSchedule(origin, destination, date);
-	//for (std::vector<Flight>::iterator res = result.begin(); res != result.end(); ++res)
-	//std::cout << *res << endl;
+	
+	DataAccess dataAccess;
+	vector<Flight*>& flights = dataAccess.getFlights();
 
 
+//	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/17/2018 8:00:00");
+	vector<Flight*> myFlights = dataAccess.GetFlightSchedule(origin, destination, date);
+	cout << "flight Detail "  << endl;
+	num = 0;
+	if (myFlights.size() < 1)
+	{
+		cout << "No matching flight" << endl;
+	}
+	cout << "total matching flight return:" << myFlights.size() << endl;
+	while (myFlights.size() > num )
+	{
+		cout << "flight" << num + 1 << endl;
+		// pick a flight based on cost, probably
+		cout << "Company Name:\t" << myFlights[num]->getCompany() << endl;
+		cout << "Flight Number\t"<< myFlights[num]->getFlightNumber() <<endl;
+		cout << "Origin:\t"<<myFlights[num]->getOrigin() << endl;
+		cout << "Destination:\t"<<myFlights[num]->getDestination()<<endl;
+		cout << "Departure Date/time:\t"<<myFlights[num]->getDepartureDateTime()<< endl;
+		num++;
+	}
+	
 	cout << "back to main menu Press 1 or to exit press any key:" << endl;
-	cin >> b;
-	if (b == 1)
+	cin >> k;
+	if (k == 1)
 	{
 		system("cls");
 		menu();
@@ -463,16 +486,8 @@ void Exit()
 
 	flag = false;
 	exit(0);
-<<<<<<< HEAD
 	
 
 }
 
 
-
-
-
-
-=======
-}
->>>>>>> 1f7b876f99f1862e84b4c73c51bda44facb317e4
