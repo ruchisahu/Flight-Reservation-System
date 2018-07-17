@@ -147,7 +147,7 @@ namespace KalAcademyFlightReservation
 						{
 							if (parts[0] == "TicketPassenger")
 							{
-								Passenger* passenger = new Passenger(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]);
+								passenger = new Passenger(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]);
 							}
 							else
 							{

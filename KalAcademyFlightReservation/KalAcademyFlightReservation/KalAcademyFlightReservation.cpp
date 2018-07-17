@@ -73,43 +73,72 @@ void TestDataAccess()
 	DataAccess dataAccess;
 	vector<Flight*>& flights = dataAccess.getFlights();
 
-	//flights.clear();
+	// how to reserve a seat
+	// find the flights based on origin, destination and time to leave
+	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/17/2018 8:00:00");
 
-	Flight* flight = new Flight("123D", "Delta Airline", "7/15/2018 8:00:00", "7/15/2018 12:00:00", "NY", "Dallas");
-	flights.push_back(flight);
-
-	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/13/2018 8:00:00");
-
-	vector<SeatDefinition*> seatDefinitions;
-	seatDefinitions.push_back(new SeatDefinition(1, 10, 5, 100, SeatCategory::Business));
-	seatDefinitions.push_back(new SeatDefinition(11, 30, 5, 10, SeatCategory::Economy));
-	flight->setSeatDefinitions(seatDefinitions);
-
-	dataAccess.SaveFlights();
-
-	bool isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
-	if (isSeatAvailable)
+	// check if there are flights
+	if (myFlights.size() > 0)
 	{
-		Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
-		flight->ReserveSeat(SeatCategory::Business, passenger, "Ticket 1");
-	}
-	isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
+		// pick a flight based on cost, probably
+		Flight* pickedFlight = myFlights[0];
+		// check if there are any seats available
+		if (pickedFlight->AreAnySeatsAvailable(SeatCategory::Business))
+		{
+			// create the passenger
+			Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
 
-	isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Economy);
-	isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
-	if (isSeatAvailable)
+			// reserve next seat
+			pickedFlight->ReserveSeat(SeatCategory::Business, passenger);
+
+			// save the changes
+			dataAccess.SaveFlights();
+		}
+	}
+
+	// testing - test that AreAnySeatsAvailable it's working by reserving all seats until plane is full
+	myFlights = dataAccess.GetFlightSchedule("Sea", "Paris", "7/17/2018 8:00:00");
+	if (myFlights.size() > 0)
 	{
-		Passenger* passenger = new Passenger("firstName2", "lastName2", "dateOfBirth2", "gender2", "address2", "phone2", "email2", "222");
-		flight->ReserveSeat(SeatCategory::Economy, passenger, "Ticket 2");
+		Flight* pickedFlight = myFlights[0];
+
+		while(pickedFlight->AreAnySeatsAvailable(SeatCategory::Business))
+		{
+			// create the passenger
+			Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
+
+			// reserve next seat
+			pickedFlight->ReserveSeat(SeatCategory::Business, passenger);
+		}
+
+		// save the changes
+		dataAccess.SaveFlights();
 	}
-	isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
 
-	isSeatAvailable = flight->IsSeatAvailable(31, 1, SeatCategory::Economy);
 
-	dataAccess.SaveFlights();
+	//bool isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
+	//if (isSeatAvailable)
+	//{
+	//	Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
+	//	flight->ReserveSeat(SeatCategory::Business, passenger, "Ticket 1");
+	//}
+	//isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
 
-	Passenger* passenger = dataAccess.GetPassengerInformation("passportId1");
-	passenger = dataAccess.GetPassengerInformation("passportId111");
+	//isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Economy);
+	//isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
+	//if (isSeatAvailable)
+	//{
+	//	Passenger* passenger = new Passenger("firstName2", "lastName2", "dateOfBirth2", "gender2", "address2", "phone2", "email2", "222");
+	//	flight->ReserveSeat(SeatCategory::Economy, passenger, "Ticket 2");
+	//}
+	//isSeatAvailable = flight->IsSeatAvailable(11, 2, SeatCategory::Economy);
+
+	//isSeatAvailable = flight->IsSeatAvailable(31, 1, SeatCategory::Economy);
+
+	//dataAccess.SaveFlights();
+
+	//Passenger* passenger = dataAccess.GetPassengerInformation("passportId1");
+	//passenger = dataAccess.GetPassengerInformation("passportId111");
 }
 
 int main()
@@ -293,9 +322,8 @@ void UserRegistration()
 		//flight->setSeatDefinitions(seatDefinitions);
 		//dataAccess.SaveFlights();
 
-		string ticketNumber = "Ticket#";
 		Passenger* passenger = new Passenger(Fname, Lname, dateOfBirth, gender, address, phone, email, passportId);
-		Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger, ticketNumber);
+		Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger);
 		//check if the reservation was made - if the flight is null then there are no more seats available, and ticket will be null
 		if (ticket == NULL)
 		{
