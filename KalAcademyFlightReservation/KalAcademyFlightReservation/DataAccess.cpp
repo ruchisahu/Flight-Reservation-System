@@ -95,6 +95,7 @@ namespace KalAcademyFlightReservation
 
 				flightFile << "Ticket;";
 				flightFile << (*ticket).getTicketNumber() << ";";
+				flightFile << "\n";
 			}
 		}
 
@@ -192,5 +193,22 @@ namespace KalAcademyFlightReservation
 	{
 		ifstream file(filename);
 		return file.good();
+	}
+
+	vector<Flight*> DataAccess::GetFlightSchedule(string origin, string destination, string date) const
+	{
+		vector<Flight*> result;
+
+		for (vector<Flight*>::const_iterator iterator = mFlights.begin(); iterator != mFlights.end(); ++iterator)
+		{
+			Flight* flight = *iterator;
+
+			if (_stricmp(flight->getOrigin().c_str(), origin.c_str()) == 0 && _stricmp(flight->getDestination().c_str(), destination.c_str()) == 0 && _stricmp(flight->getDepartureDateTime().c_str(), date.c_str()) == 0)
+			{
+				result.push_back(flight);
+			}
+		}
+
+		return result;
 	}
 }

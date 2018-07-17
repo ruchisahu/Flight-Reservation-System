@@ -75,8 +75,10 @@ void TestDataAccess()
 
 	//flights.clear();
 
-	Flight* flight = new Flight("123D", "Delta Airline", "7/13/2018 8:00:00", "7/13/2018 12:00:00", "NY", "Dallas");
+	Flight* flight = new Flight("123D", "Delta Airline", "7/15/2018 8:00:00", "7/15/2018 12:00:00", "NY", "Dallas");
 	flights.push_back(flight);
+
+	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/13/2018 8:00:00");
 
 	vector<SeatDefinition*> seatDefinitions;
 	seatDefinitions.push_back(new SeatDefinition(1, 10, 5, 100, SeatCategory::Business));
@@ -112,6 +114,9 @@ void TestDataAccess()
 
 int main()
 {
+	//TestDataAccess();
+	//return 1;
+
 	HANDLE  hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	int k = 3;               //color number
@@ -430,12 +435,4 @@ void Exit()
 
 	flag = false;
 	exit(0);
-
-
 }
-
-
-
-
-
-
