@@ -359,8 +359,8 @@ void flightSchedule()
 	vector<Flight*>& flights = dataAccess.getFlights();
 
 
-//	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/17/2018 8:00:00");
-	vector<Flight*> myFlights = dataAccess.GetFlightSchedule(origin, destination, date);
+	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/17/2018 8:00:00");
+//	vector<Flight*> myFlights = dataAccess.GetFlightSchedule(origin, destination, date);
 	cout << "flight Detail "  << endl;
 	num = 0;
 	if (myFlights.size() < 1)
