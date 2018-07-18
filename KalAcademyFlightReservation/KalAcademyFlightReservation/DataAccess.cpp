@@ -238,4 +238,20 @@ namespace KalAcademyFlightReservation
 
 		return nullptr;
 	}
+
+	Ticket* DataAccess::GetTicketInformation(const string ticketNumber) const
+	{
+		for (vector<Flight*>::const_iterator iterator = mFlights.begin(); iterator != mFlights.end(); ++iterator)
+		{
+			Flight* flight = *iterator;
+			for (vector<Ticket*>::iterator ticketIterator = flight->getTickets().begin(); ticketIterator != flight->getTickets().end(); ++ticketIterator)
+			{
+				Ticket* ticket = *ticketIterator;
+				if (_stricmp(ticket->getTicketNumber().c_str(), ticketNumber.c_str()) == 0)
+					return ticket;
+			}
+		}
+
+		return nullptr;
+	}
 }
