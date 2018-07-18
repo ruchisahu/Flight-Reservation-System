@@ -220,17 +220,18 @@ namespace KalAcademyFlightReservation
 
 		return result;
 	}
-
-	Ticket* DataAccess::GetTicketInformation(const string ticketNumber) const
+	//Flight* GetFlightInformation(int flightNumber);
+	Flight* DataAccess::GetFlightInformation( string flightNumber) const
 	{
+		//Flight*  result;
+
 		for (vector<Flight*>::const_iterator iterator = mFlights.begin(); iterator != mFlights.end(); ++iterator)
 		{
 			Flight* flight = *iterator;
-			for (vector<Ticket*>::iterator ticketIterator = flight->getTickets().begin(); ticketIterator != flight->getTickets().end(); ++ticketIterator)
+
+			if (_stricmp(flight->getFlightNumber().c_str(),flightNumber.c_str()))
 			{
-				Ticket* ticket = *ticketIterator;
-				if (_stricmp(ticket->getTicketNumber().c_str(), ticketNumber.c_str()) == 0)
-					return ticket;
+				return flight;
 			}
 		}
 

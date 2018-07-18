@@ -21,7 +21,7 @@ namespace KalAcademyFlightReservation
 
         // Returns Flight for the specified flight number.
         // Returns nullptr if invalid flight number is specified.
-        Flight* GetFlightInformation(int flightNumber);
+        Flight* GetFlightInformation(string flightNumber);
 
         // Returns Passenger for the specified PassportId which is unique identifier for a passenger.
         // Returns nullptr if passenger corresponding to specified passportId is not found.
