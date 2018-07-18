@@ -364,10 +364,10 @@ void flightSchedule()
 	cout << "list of all flights \n";
 	
 	DataAccess dataAccess;
-	vector<Flight*>& flights = dataAccess.getFlights();
+	//vector<Flight*>& flights = dataAccess.getFlights();
 
 
-//	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/17/2018_8:00:00");
+
 	vector<Flight*> myFlights = dataAccess.GetFlightSchedule(origin, destination, date);
 	cout << "flight Detail "  << endl;
 	num = 0;
@@ -472,8 +472,15 @@ void TicketInformation()
 	cout << "Inter your ticket number" << endl;
 	cin >> TicketNo;
 	Ticket *result = controller.GetTicketInformation(TicketNo);
-	cout << result->getPassenger();
-	cout << result->getSeat();
+	if (result == nullptr)
+	{
+		cout << "Invalid Ticket Number" << endl;
+	}
+	else
+	{
+		cout << result->getPassenger();
+		cout << result->getSeat();
+	}
 	cout << "back to main menu Press 1 or to exit press any key:" << endl;
 	cin >> b;
 	if (b == 1)
