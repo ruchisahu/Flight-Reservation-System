@@ -41,6 +41,8 @@ namespace KalAcademyFlightReservation
 		ofstream flightFile;
 		flightFile.open(filename);
 
+		flightFile << "LastTicketNumber;" << Ticket::lastTicketNumber << "\n";
+
 		for (vector<Flight*>::const_iterator iterator = mFlights.begin(); iterator != mFlights.end(); ++iterator)
 		{
 			Flight* flight = *iterator;
@@ -156,6 +158,13 @@ namespace KalAcademyFlightReservation
 									Ticket* ticket = new Ticket(seat, passenger, parts[1]);
 									flight->getTickets().push_back(ticket);
 								}
+								else
+								{
+									if (parts[0] == "LastTicketNumber")
+									{
+										Ticket::lastTicketNumber = stoi(parts[1]);
+									}
+								}
 							}
 						}
 					}
@@ -210,5 +219,21 @@ namespace KalAcademyFlightReservation
 		}
 
 		return result;
+	}
+
+	Ticket* DataAccess::GetTicketInformation(const string ticketNumber) const
+	{
+		for (vector<Flight*>::const_iterator iterator = mFlights.begin(); iterator != mFlights.end(); ++iterator)
+		{
+			Flight* flight = *iterator;
+			for (vector<Ticket*>::iterator ticketIterator = flight->getTickets().begin(); ticketIterator != flight->getTickets().end(); ++ticketIterator)
+			{
+				Ticket* ticket = *ticketIterator;
+				if (_stricmp(ticket->getTicketNumber().c_str(), ticketNumber.c_str()) == 0)
+					return ticket;
+			}
+		}
+
+		return nullptr;
 	}
 }

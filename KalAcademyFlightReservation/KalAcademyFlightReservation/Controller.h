@@ -29,7 +29,7 @@ namespace KalAcademyFlightReservation
 
         // Returns Ticket for the specified ticket number.
         // Returns nullptr if ticket corresponding to the specified ticket number is not found.
-        Ticket* GetTicketInformation(int ticketNo);
+        Ticket* GetTicketInformation(string ticketNo) const;
 
     private:
         // DataAccess class member variable

@@ -44,7 +44,7 @@ namespace KalAcademyFlightReservation
 
 	// Returns Ticket for the specified ticket number.
 	// Returns nullptr if ticket corresponding to the specified ticket number is not found.
-	Ticket* Controller::GetTicketInformation(int ticketNo)
+	Ticket* Controller::GetTicketInformation(string ticketNo) const
 	{
 		return dataAccess->GetTicketInformation(ticketNo);
 	}

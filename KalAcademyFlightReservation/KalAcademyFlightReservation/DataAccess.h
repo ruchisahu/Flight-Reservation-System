@@ -29,10 +29,7 @@ namespace KalAcademyFlightReservation
 
 		// Returns Ticket for the specified ticket number.
 		// Returns nullptr if ticket corresponding to the specified ticket number is not found.
-		Ticket* GetTicketInformation(int ticketNo)
-		{
-			return nullptr;
-		}
+		Ticket* GetTicketInformation(const std::string ticketNumber) const;
 
 		void SaveFlights();
 

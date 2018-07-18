@@ -7,6 +7,8 @@ namespace KalAcademyFlightReservation {
 	class Ticket
 	{
 	public:
+		static int lastTicketNumber;
+
 		Ticket() = default;
 		Ticket(Seat* seat, Passenger* passenger, string ticketNumber);
 

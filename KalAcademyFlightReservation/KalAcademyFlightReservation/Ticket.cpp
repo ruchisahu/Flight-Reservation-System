@@ -6,6 +6,8 @@
 
 namespace KalAcademyFlightReservation
 {
+	int Ticket::lastTicketNumber = 0;
+
 	Ticket::Ticket(Seat* seat, Passenger* passenger, string ticketNumber)
 	{
 		mSeat = seat;
