@@ -73,7 +73,7 @@ void TestDataAccess()
 	DataAccess dataAccess;
 	vector<Flight*>& flights = dataAccess.getFlights();
 
-	// how to reserve a seat
+	// How to reserve a seat ********************************
 	// find the flights based on origin, destination and time to leave
 	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/17/2018 8:00:00");
 
@@ -95,7 +95,7 @@ void TestDataAccess()
 			dataAccess.SaveFlights();
 		}
 	}
-
+	//****************************************************************************************
 	// testing - test that AreAnySeatsAvailable it's working by reserving all seats until plane is full
 	myFlights = dataAccess.GetFlightSchedule("Sea", "Paris", "7/17/2018 8:00:00");
 	if (myFlights.size() > 0)
@@ -113,6 +113,8 @@ void TestDataAccess()
 
 		// save the changes
 		dataAccess.SaveFlights();
+		Ticket* ticket = dataAccess.GetTicketInformation("4");
+		string s = ticket->getTicketNumber();
 	}
 
 

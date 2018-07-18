@@ -145,8 +145,8 @@ namespace KalAcademyFlightReservation
 						{
 							Seat* seat = new Seat(row, col, seatDefinition->getCost(), seatCategory);
 							// generate ticket number
-							string ticketNumber = "Ticket number " + to_string((row - 1)* numberOfSeatsRow + col);
-							Ticket* ticket = new Ticket(seat, passenger, ticketNumber);
+							Ticket::lastTicketNumber++;
+							Ticket* ticket = new Ticket(seat, passenger, to_string(Ticket::lastTicketNumber));
 							mTickets.push_back(ticket);
 							return ticket;
 						}
