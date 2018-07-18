@@ -211,4 +211,21 @@ namespace KalAcademyFlightReservation
 
 		return result;
 	}
+	//Flight* GetFlightInformation(int flightNumber);
+	Flight* DataAccess::GetFlightInformation( string flightNumber) const
+	{
+		//Flight*  result;
+
+		for (vector<Flight*>::const_iterator iterator = mFlights.begin(); iterator != mFlights.end(); ++iterator)
+		{
+			Flight* flight = *iterator;
+
+			if (_stricmp(flight->getFlightNumber().c_str(),flightNumber.c_str()))
+			{
+				return flight;
+			}
+		}
+
+		return nullptr;
+	}
 }

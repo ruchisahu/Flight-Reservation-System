@@ -30,7 +30,7 @@ namespace KalAcademyFlightReservation
 
 	// Returns Flight for the specified flight number.
 	// Returns nullptr if invalid flight number is specified.
-	Flight* Controller::GetFlightInformation(int flightNumber)
+	Flight* Controller::GetFlightInformation(string flightNumber)
 	{
 		return dataAccess->GetFlightInformation(flightNumber);
 	}

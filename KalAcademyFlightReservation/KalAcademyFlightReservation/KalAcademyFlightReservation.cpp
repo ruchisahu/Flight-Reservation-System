@@ -15,9 +15,9 @@ using namespace std;
 
 using namespace KalAcademyFlightReservation;
 
-int selection = 0, flightNumber, TicketNo, b,num,k;
+int selection = 0,  TicketNo, b,num,k;
 string origin;
-string destination, passportId, flight, dateOfBirth, gender, address, phone, email, date;
+string destination, flightNumber, passportId, flight, dateOfBirth, gender, address, phone, email, date;
 
 int traveler = 0, ticket;
 string class1 = "ec";
@@ -145,6 +145,12 @@ int main()
 {
 	//TestDataAccess();
 	//return 1;
+	Flight* flight1 = new Flight("123D", "DELTA AIRLINE", "7/17/2018_8:00:00", "7/17/2018_11:00:00", "NY", "DALLAS");
+	Flight* flight2 = new Flight("DL112", "DELTA AIRLINE", "7/29/2018_1:00:00", "7/13/2018_5:00:00", "SEA", "DALLAS");
+	Flight* flight3 = new Flight("DL111", "DELTA AIRLINE", "7/29/2018_1:00:00", "7/13/2018_5:00:00", "SEA", "NY");
+	flights.push_back(flight1);
+	flights.push_back(flight2);
+	flights.push_back(flight3);
 
 	HANDLE  hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -287,8 +293,8 @@ void UserRegistration()
 	string Fname, Lname;
 	string passportId;
 	int phoneno;
-	Flight* flight = new Flight("DL111", "Delta Airline", "7/13/2018 8:00:00", "7/13/2018 12:00:00", "NY", "Dallas");
-	flights.push_back(flight);
+	Flight* flight = new Flight("DL111", "DELTA AIRLINE", "7/13/2018_8:00:00", "7/13/2018_12:00:00", "NY", "DALLAS");
+	
 
 	cout << " Please enter user First name - " << endl;
 	cin >> Fname;
@@ -345,12 +351,14 @@ void flightSchedule()
 {
 	system("cls");
 	cout << "Flight Schedule:\n\n " << endl;
-	cout << "Example string: NY, Dallas, 7/17/2018 8:00:00" << endl;
+	cout << "Example string: NY, Dallas, 7/17/2018_8:00:00" << endl;   //cout break the string if you use space in between so I use "_" to connect date and string.
 	cout << "Enter origin: " << endl;
 	cin >> origin;
+	origin = ToUpperCase(origin);
 	cout << "Enter Destination" << endl;
 	cin >> destination;
-	cout << "Enter valid dateTime\n(format: mm/dd/yyy  hh:mm:ss for example 7/17/2018 8:00:00)" << endl;
+	destination = ToUpperCase(destination);
+	cout << "Enter valid dateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018_8:00:00)" << endl;
 	cin >> date;
 	
 	cout << "list of all flights \n";
@@ -359,7 +367,7 @@ void flightSchedule()
 	vector<Flight*>& flights = dataAccess.getFlights();
 
 
-//	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/17/2018 8:00:00");
+//	vector<Flight*> myFlights = dataAccess.GetFlightSchedule("NY", "Dallas", "7/17/2018_8:00:00");
 	vector<Flight*> myFlights = dataAccess.GetFlightSchedule(origin, destination, date);
 	cout << "flight Detail "  << endl;
 	num = 0;
