@@ -220,8 +220,9 @@ namespace KalAcademyFlightReservation
 
 		return result;
 	}
+
 	//Flight* GetFlightInformation(int flightNumber);
-	Flight* DataAccess::GetFlightInformation( string flightNumber) const
+	Flight* DataAccess::GetFlightInformation(string flightNumber) const
 	{
 		//Flight*  result;
 

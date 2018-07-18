@@ -12,11 +12,10 @@
 
 using namespace std;
 
-
 using namespace KalAcademyFlightReservation;
 
-int selection = 0,  TicketNo, b,num,k;
-string origin;
+int selection = 0, b, num, k;
+string origin, TicketNo;
 string destination, flightNumber, passportId, flight, dateOfBirth, gender, address, phone, email, date;
 
 int traveler = 0, ticket;
@@ -35,6 +34,7 @@ DataAccess dataAccess;
 Controller controller;
 vector<Flight*>& flights = dataAccess.getFlights();
 //Set position on screen
+
 string ToUpperCase(string text)
 {
 	for (int i = 0; i < text.length(); i++) {
@@ -50,6 +50,7 @@ void gotoxy(int x, int y)
 	COORD c = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
+
 //Retrun Local date/time
 void date_times()
 {
@@ -65,9 +66,7 @@ void date_times()
 
 }
 
-
 //test dataset
-
 void TestDataAccess()
 {
 	DataAccess dataAccess;
@@ -102,7 +101,7 @@ void TestDataAccess()
 	{
 		Flight* pickedFlight = myFlights[0];
 
-		while(pickedFlight->AreAnySeatsAvailable(SeatCategory::Business))
+		while (pickedFlight->AreAnySeatsAvailable(SeatCategory::Business))
 		{
 			// create the passenger
 			Passenger* passenger = new Passenger("firstName1", "lastName1", "dateOfBirth1", "gender1", "address1", "phone1", "email1", "111");
@@ -116,7 +115,6 @@ void TestDataAccess()
 		Ticket* ticket = dataAccess.GetTicketInformation("4");
 		string s = ticket->getTicketNumber();
 	}
-
 
 	//bool isSeatAvailable = flight->IsSeatAvailable(1, 1, SeatCategory::Business);
 	//if (isSeatAvailable)
@@ -177,8 +175,8 @@ int main()
 	cout << "........................................" << endl;
 	cout << endl;
 	menu();
-
 }
+
 //display menu for flight  Reservation System
 void menu()
 {
@@ -198,24 +196,17 @@ void menu()
 	cin >> selection;                                 //select option
 	while (flag != false)
 	{
-
 		switch (selection)
 		{
 		case 1:
-
 			Reserve();
 		case 2:
-
 			flightSchedule();
-
 		case 3:
-
 			UserInfo();
 		case 4:
-
 			flightDetail();
 		case 5:
-
 			TicketInformation();
 		case 6:
 			Exit();
@@ -225,6 +216,7 @@ void menu()
 		}
 	}
 }
+
 //Reserve flight
 void Reserve()
 {
@@ -276,12 +268,12 @@ void Reserve()
 	cin >> op;
 
 
-	if (op == 'Y' || op=='y')
+	if (op == 'Y' || op == 'y')
 	{
 		system("cls");
 		UserRegistration();
 	}
-	else if (op == 'N' || op=='n')
+	else if (op == 'N' || op == 'n')
 	{
 		menu();
 	}
@@ -296,7 +288,7 @@ void UserRegistration()
 	string passportId;
 	int phoneno;
 	Flight* flight = new Flight("DL111", "DELTA AIRLINE", "7/13/2018_8:00:00", "7/13/2018_12:00:00", "NY", "DALLAS");
-	
+
 
 	cout << " Please enter user First name - " << endl;
 	cin >> Fname;
@@ -345,10 +337,9 @@ void UserRegistration()
 		Sleep(4);
 		system("cls");
 		menu();
-
 	}
-
 }
+
 void flightSchedule()
 {
 	system("cls");
@@ -362,34 +353,32 @@ void flightSchedule()
 	destination = ToUpperCase(destination);
 	cout << "Enter valid dateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018_8:00:00)" << endl;
 	cin >> date;
-	
+
 	cout << "list of all flights \n";
-	
+
 	DataAccess dataAccess;
 	//vector<Flight*>& flights = dataAccess.getFlights();
 
-
-
 	vector<Flight*> myFlights = dataAccess.GetFlightSchedule(origin, destination, date);
-	cout << "flight Detail "  << endl;
+	cout << "flight Detail " << endl;
 	num = 0;
 	if (myFlights.size() < 1)
 	{
 		cout << "No matching flight" << endl;
 	}
 	cout << "total matching flight return:" << myFlights.size() << endl;
-	while (myFlights.size() > num )
+	while (myFlights.size() > num)
 	{
 		cout << "flight" << num + 1 << endl;
 		// pick a flight based on cost, probably
 		cout << "Company Name:\t" << myFlights[num]->getCompany() << endl;
-		cout << "Flight Number\t"<< myFlights[num]->getFlightNumber() <<endl;
-		cout << "Origin:\t"<<myFlights[num]->getOrigin() << endl;
-		cout << "Destination:\t"<<myFlights[num]->getDestination()<<endl;
-		cout << "Departure Date/time:\t"<<myFlights[num]->getDepartureDateTime()<< endl;
+		cout << "Flight Number\t" << myFlights[num]->getFlightNumber() << endl;
+		cout << "Origin:\t" << myFlights[num]->getOrigin() << endl;
+		cout << "Destination:\t" << myFlights[num]->getDestination() << endl;
+		cout << "Departure Date/time:\t" << myFlights[num]->getDepartureDateTime() << endl;
 		num++;
 	}
-	
+
 	cout << "back to main menu Press 1 or to exit press any key:" << endl;
 	cin >> k;
 	if (k == 1)
@@ -400,6 +389,7 @@ void flightSchedule()
 	else
 		Exit();
 }
+
 //User Information required bu menu selection "3".Based on passport Id this function will provide all other information.
 void  UserInfo()
 {
@@ -430,19 +420,19 @@ void  UserInfo()
 	}
 	else
 		Exit();
-
 }
+
 //flight detail based on menu selection "4".
 void flightDetail()
 {
 	int b;
 	system("cls");
-	cout << "Inter your flight Number" << endl;
+	cout << "Enter Your Flight Number" << endl;
 	cin >> flightNumber;
 	Flight *result = controller.GetFlightInformation(flightNumber);
 	if (result == nullptr)
 	{
-		cout << "Invalid flight Number" << endl;
+		cout << "Invalid Flight Number" << endl;
 	}
 	else
 	{
@@ -462,10 +452,8 @@ void flightDetail()
 	}
 	else
 		Exit();
-
-
-
 }
+
 //ticket information based on menu selection 5.
 void TicketInformation()
 {
@@ -473,7 +461,7 @@ void TicketInformation()
 
 	cout << "Inter your ticket number" << endl;
 	cin >> TicketNo;
-	Ticket *result = controller.GetTicketInformation(TicketNo);
+	Ticket* result = controller.GetTicketInformation(TicketNo);
 	if (result == nullptr)
 	{
 		cout << "Invalid Ticket Number" << endl;
@@ -492,8 +480,8 @@ void TicketInformation()
 	}
 	else
 		Exit();
-
 }
+
 //exit from screen 
 void Exit()
 {
@@ -503,8 +491,4 @@ void Exit()
 
 	flag = false;
 	exit(0);
-	
-
 }
-
-
