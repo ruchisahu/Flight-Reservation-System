@@ -25,7 +25,7 @@ bool flag;
 void menu();
 void Reserve();
 void UserInfo();
-void UserRegistration();
+void UserRegistration(string class1);
 void flightSchedule();
 void flightDetail();
 void TicketInformation();
@@ -280,7 +280,7 @@ void Reserve()
 	if (op == 'Y' || op == 'y')
 	{
 		system("cls");
-		UserRegistration();
+		UserRegistration(class1);
 	}
 	else if (op == 'N' || op == 'n')
 	{
@@ -291,7 +291,7 @@ void Reserve()
 }
 
 //User Registration required by reseve function.
-void UserRegistration()
+void UserRegistration(string class1)
 {
 	string Fname, Lname;
 	string passportId;
@@ -314,7 +314,7 @@ void UserRegistration()
 	cout << " Gender- (M, F):" ;
 	cin >> gender;
 	
-	cout << " phone number- " ;
+	cout << " Phone number- " ;
 	cin >> phone;
 	
 	cout << " Email- " ;
@@ -338,9 +338,30 @@ void UserRegistration()
 		//seatDefinitions.push_back(new SeatDefinition(11, 30, 5, 10, SeatCategory::Economy));
 		//flight->setSeatDefinitions(seatDefinitions);
 		//dataAccess.SaveFlights();
-
+		//TOdo:reserve a seat
 		Passenger* passenger = new Passenger(Fname, Lname, dateOfBirth, gender, address, phone, email, passportId);
-		Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger);
+
+		SeatCategory class2;
+
+		if (class1 == "BUSINESS")
+		{
+			class2 = SeatCategory::Business;
+		}
+		else if (class1 == "ECONOMY")
+		{
+			class2 = SeatCategory::Economy;
+		}
+
+		Ticket* ticket = flight->ReserveSeat(class2, passenger);
+	/*	if (class1 == "Business")
+		{
+			Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger);
+		}
+		if (class1 == "Economy")
+		{
+			Ticket* ticket = flight->ReserveSeat(SeatCategory::Economy, passenger);
+		}
+		*/
 		//check if the reservation was made - if the flight is null then there are no more seats available, and ticket will be null
 		if (ticket == NULL)
 		{
