@@ -395,7 +395,7 @@ void  UserInfo()
 {
 	system("cls");
 	int b;
-	cout << "Inter your passport Number" << endl;
+	cout << "Enter your passport Number" << endl;
 	cin >> passportId;
 	cout << "User Information: \n";
 
@@ -406,10 +406,12 @@ void  UserInfo()
 	}
 	else
 	{
-		cout << " first name:" << result->getFirstName() << endl;
+		cout << " First name:" << result->getFirstName() << endl;
 		cout << " Last name:" << result->getLastName() << endl;
-		cout << " date of Birth:" << result->getDateOfBirth() << endl;
-		cout << " Email Address:" << result->getPhone() << endl;
+		cout << " Date of Birth:" << result->getDateOfBirth() << endl;
+		cout << " Email Address:" << result->getEmail() << endl;
+        cout << " Phone No:" << result->getPhone() << endl;
+
 	}
 	cout << "back to main menu Press 1 or to exit press any key:" << endl;
 	cin >> b;
@@ -459,7 +461,7 @@ void TicketInformation()
 {
 	system("cls");
 
-	cout << "Inter your ticket number" << endl;
+	cout << "Enter your ticket number" << endl;
 	cin >> TicketNo;
 	Ticket* result = controller.GetTicketInformation(TicketNo);
 	if (result == nullptr)
