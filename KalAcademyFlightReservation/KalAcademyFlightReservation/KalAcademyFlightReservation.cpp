@@ -264,6 +264,7 @@ void Reserve()
 		class1 = ToUpperCase(class1);
 	}
 	cout << "**********************" << endl;
+
 	//todo
 //	cout << "list of avalaible flights " << endl;
 //	controller.GetFlightSchedule(origin, destination, date);
