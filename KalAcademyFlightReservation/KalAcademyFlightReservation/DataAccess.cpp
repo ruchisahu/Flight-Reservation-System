@@ -230,7 +230,7 @@ namespace KalAcademyFlightReservation
 		{
 			Flight* flight = *iterator;
 
-			if (_stricmp(flight->getFlightNumber().c_str(),flightNumber.c_str()))
+			if (_stricmp(flight->getFlightNumber().c_str(),flightNumber.c_str()) == 0)  // _stricmp returns 0 if two strings are identical
 			{
 				return flight;
 			}
