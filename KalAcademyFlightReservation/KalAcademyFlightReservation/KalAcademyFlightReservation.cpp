@@ -379,7 +379,7 @@ void flightSchedule()
 		num++;
 	}
 
-	cout << "back to main menu Press 1 or to exit press any key:" << endl;
+	cout << "Back to main menu Press 1 or to exit press any key:" << endl;
 	cin >> k;
 	if (k == 1)
 	{
@@ -395,7 +395,7 @@ void  UserInfo()
 {
 	system("cls");
 	int b;
-	cout << "Enter your passport Number" << endl;
+	cout << "Enter your Passport Number" << endl;
 	cin >> passportId;
 	cout << "User Information: \n";
 
@@ -445,7 +445,7 @@ void flightDetail()
 		cout << "Origin" << result->getOrigin() << endl;
 		//cout << "Seat Availability:"<<result->IsSeatAvailable() <<endl;
 	}
-	cout << "back to main menu Press 1 or to exit press any key:" << endl;
+	cout << "Back to main menu Press 1 or to exit press any key:" << endl;
 	cin >> b;
 	if (b == 1)
 	{
@@ -468,12 +468,33 @@ void TicketInformation()
 	{
 		cout << "Invalid Ticket Number" << endl;
 	}
-	else
-	{
-		cout << result->getPassenger();
-		cout << result->getSeat();
-	}
-	cout << "back to main menu Press 1 or to exit press any key:" << endl;
+    else
+    {
+        //cout << "Your Ticket details:" << endl;
+        cout << endl;
+        cout << "**********************" << endl;
+        cout << "*  Seat Information  *" << endl;
+        cout << "**********************" << endl;
+        const Seat *seat = result->getSeat();
+        cout << " Row number: " << seat->getRow() << endl;
+        cout << " Aisle number: " << seat->getAisle() << endl;
+        cout << " Cost: " << seat->getCost() << endl;
+        cout << " Class: " << seat->getClass() << endl << endl;
+
+        cout << "***************************" << endl;
+        cout << "*  Passenger Information  *" << endl;
+        cout << "***************************" << endl;
+        Passenger *passenger = result->getPassenger();
+        cout << " First name:  " << passenger->getFirstName() << endl;
+        cout << " Last name: " << passenger->getLastName() << endl;
+        cout << " Date of Birth: " << passenger->getDateOfBirth() << endl;
+        cout << " Gender: " << passenger->getGender()<< endl;
+        cout << " Phone No: " << passenger->getPhone() << endl;
+        cout << " Email Address: " << passenger->getEmail() << endl;
+        cout << " Passport Id: " << passenger->getPassportId() << endl << endl;
+
+    }
+	cout << "Back to main menu Press 1 or to exit press any key:" << endl;
 	cin >> b;
 	if (b == 1)
 	{
