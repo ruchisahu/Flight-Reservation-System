@@ -45,6 +45,7 @@ string ToUpperCase(string text)
 	}
 	return text;
 }
+
 void gotoxy(int x, int y)
 {
 	COORD c = { x, y };
@@ -224,44 +225,41 @@ void Reserve()
 	gotoxy(40, 5);
 	cout << "Book a Flight \n\n" << endl;
 
-	cout << "NOTE: Available Options(NY,Dallas,SEA,Paris) \n";
-	cout << "***************************************************\n" << endl;
+	cout << "Current Available Options: NY, Dallas, SEA, Paris \n";
+	cout << "*************************************************** \n" << endl;
 
-	cout << "Enter valid origin:";
+	cout << "Enter origin:";
 	cin >> origin;
 	origin = ToUpperCase(origin);
 
 	while ((origin != "NY") && (origin != "DALLAS") && (origin != "SEA") && (origin != "PARIS"))
 	{
-
-		cout << "invalid origin Enter again:" << endl;
+		cout << "Invalid origin. Enter again:";
 		cin >> origin;
 		origin = ToUpperCase(origin);
 	}
 
-	cout << " Please enter destination - " << endl;
+	cout << "Enter destination:" << endl;
 	cin >> destination;
 	destination = ToUpperCase(destination);
 	while ((destination != "NY") && (destination != "DALLAS") && (destination != "SEA") && (destination != "PARIS"))
 	{
-		cout << "invalid destination Enter again:" << endl;
+		cout << "Invalid destination. Enter again:";
 		cin >> destination;
 		destination = ToUpperCase(destination);
-		
 	}
 	
-	cout << " Please enter departure date - " ;
+	cout << "Enter departure date:" ;
 	cin >> date;
 	
 	//	cout << " Please enter number of travelers: "<<endl;
 	//	cin >> traveler;
-	cout << " Please enter class: Choose between  Business and Economy " << endl;
+	cout << "Enter class (Business or Economy):";
 	cin >> class1;
 	class1 = ToUpperCase(class1);
 	while ((class1 != "BUSINESS") && (class1 != "ECONOMY"))
 	{
-
-		cout << "invalid class Enter again:" << endl;
+		cout << "Invalid Class. Enter again:";
 		cin >> class1;
 		class1 = ToUpperCase(class1);
 	}
@@ -271,11 +269,8 @@ void Reserve()
 //	controller.GetFlightSchedule(origin, destination, date);
 //	cout << "which flight you want to book? Enter valid flight Number:" <<endl;
 //	cin >> flightNumber;
-	cout << " Do want to continue:" << endl;
-	cout << " Y to continue :" << endl;
-	cout << "N back to main menu:" << endl;
+	cout << "Continue? (Y/N):";
 	cin >> op;
-
 
 	if (op == 'Y' || op == 'y')
 	{
@@ -298,41 +293,40 @@ void UserRegistration()
 	int phoneno;
 	Flight* flight = new Flight("DL111", "DELTA AIRLINE", "7/13/2018_8:00:00", "7/13/2018_12:00:00", "NY", "DALLAS");
 
-
-	cout << " Please enter user First name - ";
+	cout << "Enter First Name:";
 	cin >> Fname;
 	
-	cout << " Please enter user Last name - ";
+	cout << "Enter Last Name:";
 	cin >> Lname;
 	
-	cout << " Please enter date of Birth(mm/dd/yyyy) - " ;
+	cout << "Enter Date of Birth (MM/DD/YYYY):";
 	cin >> dateOfBirth;
 	
-	cout << " Please enter valid Address - " << endl;
+	cout << "Enter Address:";
 	cin >> address;
 	
-	cout << " Gender- (M, F):" ;
+	cout << "Enter Gender (M/F):" ;
 	cin >> gender;
 	
-	cout << " phone number- " ;
+	cout << "Enter Phone:" ;
 	cin >> phone;
 	
-	cout << " Email- " ;
+	cout << "Enter Email:" ;
 	cin >> email;
 	
-	cout << " Please enter unique id/passport - " ;
+	cout << "Enter Unique ID/Passport:";
 	cin >> passportId;
 	cout << "**********************" << endl;
 
 	if (Fname == "0" | passportId == "0") //make sure a username/password has been set
 	{
-		cout << " Invalid name/passport " << endl;
+		cout << "Invalid Name & Passport." << endl;
 		Sleep(4);
 		menu();
 	}
 	else
 	{
-		cout << "  USERNAME AND PASSPORT SET." << endl;
+		cout << "USERNAME AND PASSPORT SET." << endl;
 		//vector<SeatDefinition*> seatDefinitions;
 		//seatDefinitions.push_back(new SeatDefinition(1, 10, 5, 100, SeatCategory::Business));
 		//seatDefinitions.push_back(new SeatDefinition(11, 30, 5, 10, SeatCategory::Economy));
@@ -360,37 +354,37 @@ void UserRegistration()
 void flightSchedule()
 {
 	system("cls");
-	cout << "Flight Schedule: " << endl;
+	cout << "Flight Schedule:" << endl;
 	cout << "**************************" << endl;
 	cout << "Example string: NY, Dallas, 7/17/2018_8:00:00" << endl;   //cout break the string if you use space in between so I use "_" to connect date and string.
-	cout << "Enter origin: " ;
+	cout << "Enter Origin:" ;
 	cin >> origin;
 	origin = ToUpperCase(origin);
 	
-	cout << "Enter Destination" << endl;
+	cout << "Enter Destination:" << endl;
 	cin >> destination;
 	destination = ToUpperCase(destination);
 	
-	cout << "Enter valid dateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018_8:00:00)" ;
+	cout << "Enter Valid DateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018_8:00:00):" ;
 	cin >> date;
 	cout << "**********************" << endl;
 
-	cout << "list of all flights \n";
+	cout << "List Of All Flights \n";
 	cout << "**************************" << endl;
 	DataAccess dataAccess;
 	//vector<Flight*>& flights = dataAccess.getFlights();
 
 	vector<Flight*> myFlights = dataAccess.GetFlightSchedule(origin, destination, date);
-	cout << "flight Detail " << endl;
+	cout << "Flight Detail:" << endl;
 	num = 0;
 	if (myFlights.size() < 1)
 	{
-		cout << "No matching flight" << endl;
+		cout << "No Matching Flight." << endl;
 	}
-	cout << "total matching flight return:" << myFlights.size() << endl;
+	cout << "Total Matching Flight Return:" << myFlights.size() << endl;
 	while (myFlights.size() > num)
 	{
-		cout << "flight" << num + 1 << endl;
+		cout << "Flight" << num + 1 << endl;
 		cout << "**************************" << endl;
 		// pick a flight based on cost, probably
 		cout << "Company Name:\t" << myFlights[num]->getCompany() << endl;
@@ -406,7 +400,7 @@ void flightSchedule()
 		num++;
 	}
 
-	cout << "Back to main menu Press 1 or to exit press any key:" << endl;
+	cout << "Press '1' to return back to the menu or press any key to exit:" << endl;
 	cin >> k;
 	if (k == 1)
 	{
@@ -422,7 +416,7 @@ void  UserInfo()
 {
 	system("cls");
 	int b;
-	cout << "Enter your Passport Number" ;
+	cout << "Enter your Passport Number:" ;
 	cin >> passportId;
 	cout << "***************************" << endl;
 	cout << "User Information: \n";
@@ -430,7 +424,7 @@ void  UserInfo()
 	Passenger *result = controller.GetPassengerInformation(passportId);
 	if (result == nullptr)
 	{
-		cout << "Invalid passport Number" << endl;
+		cout << "Invalid Passport Number." << endl;
 	}
 	else
 	{
@@ -439,9 +433,8 @@ void  UserInfo()
 		cout << " Date of Birth:" << result->getDateOfBirth() << endl;
 		cout << " Email Address:" << result->getEmail() << endl;
         cout << " Phone No:" << result->getPhone() << endl;
-
 	}
-	cout << "back to main menu Press 1 or to exit press any key:" << endl;
+	cout << "Press '1' to return back to the menu or press any key to exit:" << endl;
 	cin >> b;
 	if (b == 1)
 	{
@@ -457,12 +450,12 @@ void flightDetail()
 {
 	int b;
 	system("cls");
-	cout << "Enter Your Flight Number" << endl;
+	cout << "Enter Your Flight Number:" << endl;
 	cin >> flightNumber;
 	Flight *result = controller.GetFlightInformation(flightNumber);
 	if (result == nullptr)
 	{
-		cout << "Invalid Flight Number" << endl;
+		cout << "Invalid Flight Number." << endl;
 	}
 	else
 	{
@@ -473,7 +466,7 @@ void flightDetail()
 		cout << "Origin" << result->getOrigin() << endl;
 		//cout << "Seat Availability:"<<result->IsSeatAvailable() <<endl;
 	}
-	cout << "Back to main menu Press 1 or to exit press any key:" << endl;
+	cout << "Press '1' to return back to the menu or press any key to exit:" << endl;
 	cin >> b;
 	if (b == 1)
 	{
@@ -489,12 +482,12 @@ void TicketInformation()
 {
 	system("cls");
 
-	cout << "Enter your ticket number" << endl;
+	cout << "Enter Your Ticket Number:" << endl;
 	cin >> TicketNo;
 	Ticket* result = controller.GetTicketInformation(TicketNo);
 	if (result == nullptr)
 	{
-		cout << "Invalid Ticket Number" << endl;
+		cout << "Invalid Ticket Number." << endl;
 	}
     else
     {
@@ -504,25 +497,25 @@ void TicketInformation()
         cout << "*  Seat Information  *" << endl;
         cout << "**********************" << endl;
         const Seat *seat = result->getSeat();
-        cout << " Row number: " << seat->getRow() << endl;
-        cout << " Aisle number: " << seat->getAisle() << endl;
-        cout << " Cost: " << seat->getCost() << endl;
-        cout << " Class: " << seat->getClass() << endl << endl;
+        cout << " Row Number:" << seat->getRow() << endl;
+        cout << " Aisle Number:" << seat->getAisle() << endl;
+        cout << " Cost:" << seat->getCost() << endl;
+        cout << " Class:" << seat->getClass() << endl << endl;
 
         cout << "***************************" << endl;
         cout << "*  Passenger Information  *" << endl;
         cout << "***************************" << endl;
         Passenger *passenger = result->getPassenger();
-        cout << " First name:  " << passenger->getFirstName() << endl;
-        cout << " Last name: " << passenger->getLastName() << endl;
-        cout << " Date of Birth: " << passenger->getDateOfBirth() << endl;
-        cout << " Gender: " << passenger->getGender()<< endl;
-        cout << " Phone No: " << passenger->getPhone() << endl;
-        cout << " Email Address: " << passenger->getEmail() << endl;
-        cout << " Passport Id: " << passenger->getPassportId() << endl << endl;
+        cout << " First name:" << passenger->getFirstName() << endl;
+        cout << " Last name:" << passenger->getLastName() << endl;
+        cout << " Date of Birth:" << passenger->getDateOfBirth() << endl;
+        cout << " Gender:" << passenger->getGender()<< endl;
+        cout << " Phone No:" << passenger->getPhone() << endl;
+        cout << " Email Address:" << passenger->getEmail() << endl;
+        cout << " Passport Id:" << passenger->getPassportId() << endl << endl;
 
     }
-	cout << "Back to main menu Press 1 or to exit press any key:" << endl;
+	cout << "Press '1' to return back to the menu or press any key to exit:" << endl;
 	cin >> b;
 	if (b == 1)
 	{
@@ -537,7 +530,7 @@ void TicketInformation()
 void Exit()
 {
 	Sleep(50);
-	cout << " Thankyou for getting in touch !\n";
+	cout << "Thank you for using the reservation system!\n";
 	Sleep(800);
 
 	flag = false;
