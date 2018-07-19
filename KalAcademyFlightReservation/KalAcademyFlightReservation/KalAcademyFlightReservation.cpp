@@ -223,7 +223,9 @@ void Reserve()
 	system("cls");
 	gotoxy(40, 5);
 	cout << "Book a Flight \n\n" << endl;
-	cout << "NOTE: Available Options(NY,Dallas,SEA,Paris) \n\n";
+
+	cout << "NOTE: Available Options(NY,Dallas,SEA,Paris) \n";
+	cout << "***************************************************\n" << endl;
 
 	cout << "Enter valid origin:";
 	cin >> origin;
@@ -234,6 +236,7 @@ void Reserve()
 
 		cout << "invalid origin Enter again:" << endl;
 		cin >> origin;
+		origin = ToUpperCase(origin);
 	}
 
 	cout << " Please enter destination - " << endl;
@@ -243,9 +246,13 @@ void Reserve()
 	{
 		cout << "invalid destination Enter again:" << endl;
 		cin >> destination;
+		destination = ToUpperCase(destination);
+		
 	}
-	cout << " Please enter departure date - " << endl;
+	
+	cout << " Please enter departure date - " ;
 	cin >> date;
+	
 	//	cout << " Please enter number of travelers: "<<endl;
 	//	cin >> traveler;
 	cout << " Please enter class: Choose between  Business and Economy " << endl;
@@ -256,7 +263,9 @@ void Reserve()
 
 		cout << "invalid class Enter again:" << endl;
 		cin >> class1;
+		class1 = ToUpperCase(class1);
 	}
+	cout << "**********************" << endl;
 	//todo
 //	cout << "list of avalaible flights " << endl;
 //	controller.GetFlightSchedule(origin, destination, date);
@@ -290,22 +299,30 @@ void UserRegistration()
 	Flight* flight = new Flight("DL111", "DELTA AIRLINE", "7/13/2018_8:00:00", "7/13/2018_12:00:00", "NY", "DALLAS");
 
 
-	cout << " Please enter user First name - " << endl;
+	cout << " Please enter user First name - ";
 	cin >> Fname;
-	cout << " Please enter user Last name - " << endl;
+	
+	cout << " Please enter user Last name - ";
 	cin >> Lname;
-	cout << " Please enter date of Birth(mm/dd/yyyy) - " << endl;
+	
+	cout << " Please enter date of Birth(mm/dd/yyyy) - " ;
 	cin >> dateOfBirth;
+	
 	cout << " Please enter valid Address - " << endl;
 	cin >> address;
-	cout << " Gender- (M, F):" << endl;
+	
+	cout << " Gender- (M, F):" ;
 	cin >> gender;
-	cout << " phone number- " << endl;
+	
+	cout << " phone number- " ;
 	cin >> phone;
-	cout << " Email- " << endl;
+	
+	cout << " Email- " ;
 	cin >> email;
-	cout << " Please enter unique id/passport - " << endl;
+	
+	cout << " Please enter unique id/passport - " ;
 	cin >> passportId;
+	cout << "**********************" << endl;
 
 	if (Fname == "0" | passportId == "0") //make sure a username/password has been set
 	{
@@ -343,19 +360,23 @@ void UserRegistration()
 void flightSchedule()
 {
 	system("cls");
-	cout << "Flight Schedule:\n\n " << endl;
+	cout << "Flight Schedule: " << endl;
+	cout << "**************************" << endl;
 	cout << "Example string: NY, Dallas, 7/17/2018_8:00:00" << endl;   //cout break the string if you use space in between so I use "_" to connect date and string.
-	cout << "Enter origin: " << endl;
+	cout << "Enter origin: " ;
 	cin >> origin;
 	origin = ToUpperCase(origin);
+	
 	cout << "Enter Destination" << endl;
 	cin >> destination;
 	destination = ToUpperCase(destination);
-	cout << "Enter valid dateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018_8:00:00)" << endl;
+	
+	cout << "Enter valid dateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018_8:00:00)" ;
 	cin >> date;
+	cout << "**********************" << endl;
 
 	cout << "list of all flights \n";
-
+	cout << "**************************" << endl;
 	DataAccess dataAccess;
 	//vector<Flight*>& flights = dataAccess.getFlights();
 
@@ -370,12 +391,18 @@ void flightSchedule()
 	while (myFlights.size() > num)
 	{
 		cout << "flight" << num + 1 << endl;
+		cout << "**************************" << endl;
 		// pick a flight based on cost, probably
 		cout << "Company Name:\t" << myFlights[num]->getCompany() << endl;
+		
 		cout << "Flight Number\t" << myFlights[num]->getFlightNumber() << endl;
+		
 		cout << "Origin:\t" << myFlights[num]->getOrigin() << endl;
+		
 		cout << "Destination:\t" << myFlights[num]->getDestination() << endl;
+		
 		cout << "Departure Date/time:\t" << myFlights[num]->getDepartureDateTime() << endl;
+		cout << "***************************" << endl;
 		num++;
 	}
 
@@ -395,8 +422,9 @@ void  UserInfo()
 {
 	system("cls");
 	int b;
-	cout << "Enter your Passport Number" << endl;
+	cout << "Enter your Passport Number" ;
 	cin >> passportId;
+	cout << "***************************" << endl;
 	cout << "User Information: \n";
 
 	Passenger *result = controller.GetPassengerInformation(passportId);
