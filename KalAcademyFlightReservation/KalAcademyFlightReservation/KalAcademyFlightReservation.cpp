@@ -25,7 +25,7 @@ bool flag;
 void menu();
 void Reserve();
 void UserInfo();
-void UserRegistration(string class1);
+void UserRegistration(Flight* flight,string class1);
 void flightSchedule();
 void flightDetail();
 void TicketInformation();
@@ -248,10 +248,12 @@ void Reserve()
 		cin >> destination;
 		destination = ToUpperCase(destination);
 	}
-	
-	cout << "Enter departure date:" ;
-	cin >> date;
-	
+
+	cin.ignore();
+
+	cout << "Enter departure date:";
+	getline(cin, date);
+
 	//	cout << " Please enter number of travelers: "<<endl;
 	//	cin >> traveler;
 	cout << "Enter class (Business or Economy):";
@@ -265,18 +267,59 @@ void Reserve()
 	}
 	cout << "**********************" << endl;
 
-	//todo
-//	cout << "list of avalaible flights " << endl;
-//	controller.GetFlightSchedule(origin, destination, date);
-//	cout << "which flight you want to book? Enter valid flight Number:" <<endl;
-//	cin >> flightNumber;
+	cout << "list of avalaible flights " << endl;
+	vector<Flight*> flights = dataAccess.GetFlightSchedule(origin, destination, date);
+	//******************************
+	if (flights.size() == 0)
+	{
+		return;  // TO DO: write some messages in case where no flights are found and return to Main Menu
+	}
+	int num = 0;
+	for (vector<Flight*>::const_iterator iterator = flights.begin(); iterator != flights.end(); ++iterator)
+	{
+		Flight* flight = *iterator;
+
+		cout << "Flight " << num + 1 << endl;
+		cout << "**************************" << endl;
+		// pick a flight based on cost, probably
+		cout << "Company Name:\t" << flight->getCompany() << endl;
+
+		cout << "Flight Number\t" << flight->getFlightNumber() << endl;
+
+		cout << "Origin:\t" << flight->getOrigin() << endl;
+
+		cout << "Destination:\t" << flight->getDestination() << endl;
+
+		cout << "Departure Date/time:\t" << flight->getDepartureDateTime() << endl;
+		cout << "***************************" << endl;
+		num++;
+	}
+
+	cout << "which flight you want to book? Enter valid flight Number:" <<endl;
+	cin >> flightNumber;
+
+	//Find the flight with this flight number
+	Flight* flightWithFNumber = nullptr;
+
+	for (vector<Flight*>::const_iterator iterator = flights.begin(); iterator != flights.end(); ++iterator)
+	{
+		flightWithFNumber = *iterator;
+		if (_stricmp(flightWithFNumber->getFlightNumber().c_str(), flightNumber.c_str()) == 0)
+		{
+			break;
+		}
+	}
+	if (flightWithFNumber == nullptr)
+	{
+		return; // TO DO: write some messages in case where no flights are found and return to Main Menu 
+	}
 	cout << "Continue? (Y/N):";
 	cin >> op;
 
 	if (op == 'Y' || op == 'y')
 	{
 		system("cls");
-		UserRegistration(class1);
+		UserRegistration(flightWithFNumber,class1);
 	}
 	else if (op == 'N' || op == 'n')
 	{
@@ -287,34 +330,34 @@ void Reserve()
 }
 
 //User Registration required by reseve function.
-void UserRegistration(string class1)
+void UserRegistration(Flight* flightWithFNumber,string class1)
 {
 	string Fname, Lname;
 	string passportId;
 	int phoneno;
-	Flight* flight = new Flight("DL111", "DELTA AIRLINE", "7/13/2018_8:00:00", "7/13/2018_12:00:00", "NY", "DALLAS");
+	//Flight* flight = new Flight("DL111", "DELTA AIRLINE", "7/13/2018_8:00:00", "7/13/2018_12:00:00", "NY", "DALLAS");
 
 	cout << "Enter First Name:";
 	cin >> Fname;
-	
+
 	cout << "Enter Last Name:";
 	cin >> Lname;
-	
+
 	cout << "Enter Date of Birth (MM/DD/YYYY):";
 	cin >> dateOfBirth;
-	
+
 	cout << "Enter Address:";
 	cin >> address;
-	
-	cout << "Enter Gender (M/F):" ;
+
+	cout << "Enter Gender (M/F):";
 	cin >> gender;
-	
-	cout << "Enter Phone:" ;
+
+	cout << "Enter Phone:";
 	cin >> phone;
-	
-	cout << "Enter Email:" ;
+
+	cout << "Enter Email:";
 	cin >> email;
-	
+
 	cout << "Enter Unique ID/Passport:";
 	cin >> passportId;
 	cout << "**********************" << endl;
@@ -347,17 +390,17 @@ void UserRegistration(string class1)
 			class2 = SeatCategory::Economy;
 		}
 
-		Ticket* ticket = flight->ReserveSeat(class2, passenger);
-	/*	if (class1 == "Business")
-		{
-			Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger);
-		}
-		if (class1 == "Economy")
-		{
-			Ticket* ticket = flight->ReserveSeat(SeatCategory::Economy, passenger);
-		}
-		*/
-		//check if the reservation was made - if the flight is null then there are no more seats available, and ticket will be null
+		Ticket* ticket = flightWithFNumber->ReserveSeat(class2, passenger);
+		/*	if (class1 == "Business")
+			{
+				Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger);
+			}
+			if (class1 == "Economy")
+			{
+				Ticket* ticket = flight->ReserveSeat(SeatCategory::Economy, passenger);
+			}
+			*/
+			//check if the reservation was made - if the flight is null then there are no more seats available, and ticket will be null
 		if (ticket == NULL)
 		{
 			delete passenger;
@@ -378,17 +421,19 @@ void flightSchedule()
 	system("cls");
 	cout << "Flight Schedule:" << endl;
 	cout << "**************************" << endl;
-	cout << "Example string: NY, Dallas, 7/17/2018_8:00:00" << endl;   //cout break the string if you use space in between so I use "_" to connect date and string.
-	cout << "Enter Origin:" ;
+	cout << "Example string: NY, Dallas, 7/17/2018 8:00:00" << endl;   //cout break the string if you use space in between so I use "_" to connect date and string.
+	cout << "Enter Origin:";
 	cin >> origin;
 	origin = ToUpperCase(origin);
-	
+
 	cout << "Enter Destination:" << endl;
 	cin >> destination;
 	destination = ToUpperCase(destination);
-	
-	cout << "Enter Valid DateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018_8:00:00):" ;
-	cin >> date;
+
+	cin.ignore();
+
+	cout << "Enter Valid DateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018_8:00:00):";
+	getline(cin, date);
 	cout << "**********************" << endl;
 
 	cout << "List Of All Flights \n";
@@ -410,13 +455,13 @@ void flightSchedule()
 		cout << "**************************" << endl;
 		// pick a flight based on cost, probably
 		cout << "Company Name:\t" << myFlights[num]->getCompany() << endl;
-		
+
 		cout << "Flight Number\t" << myFlights[num]->getFlightNumber() << endl;
-		
+
 		cout << "Origin:\t" << myFlights[num]->getOrigin() << endl;
-		
+
 		cout << "Destination:\t" << myFlights[num]->getDestination() << endl;
-		
+
 		cout << "Departure Date/time:\t" << myFlights[num]->getDepartureDateTime() << endl;
 		cout << "***************************" << endl;
 		num++;
@@ -438,7 +483,7 @@ void  UserInfo()
 {
 	system("cls");
 	int b;
-	cout << "Enter your Passport Number:" ;
+	cout << "Enter your Passport Number:";
 	cin >> passportId;
 	cout << "***************************" << endl;
 	cout << "User Information: \n";
@@ -454,7 +499,7 @@ void  UserInfo()
 		cout << " Last name:" << result->getLastName() << endl;
 		cout << " Date of Birth:" << result->getDateOfBirth() << endl;
 		cout << " Email Address:" << result->getEmail() << endl;
-        cout << " Phone No:" << result->getPhone() << endl;
+		cout << " Phone No:" << result->getPhone() << endl;
 	}
 	cout << "Press '1' to return back to the menu or press any key to exit:" << endl;
 	cin >> b;
@@ -511,32 +556,32 @@ void TicketInformation()
 	{
 		cout << "Invalid Ticket Number." << endl;
 	}
-    else
-    {
-        //cout << "Your Ticket details:" << endl;
-        cout << endl;
-        cout << "**********************" << endl;
-        cout << "*  Seat Information  *" << endl;
-        cout << "**********************" << endl;
-        const Seat *seat = result->getSeat();
-        cout << " Row Number:" << seat->getRow() << endl;
-        cout << " Aisle Number:" << seat->getAisle() << endl;
-        cout << " Cost:" << seat->getCost() << endl;
-        cout << " Class:" << seat->getClass() << endl << endl;
+	else
+	{
+		//cout << "Your Ticket details:" << endl;
+		cout << endl;
+		cout << "**********************" << endl;
+		cout << "*  Seat Information  *" << endl;
+		cout << "**********************" << endl;
+		const Seat *seat = result->getSeat();
+		cout << " Row Number:" << seat->getRow() << endl;
+		cout << " Aisle Number:" << seat->getAisle() << endl;
+		cout << " Cost:" << seat->getCost() << endl;
+		cout << " Class:" << seat->getClass() << endl << endl;
 
-        cout << "***************************" << endl;
-        cout << "*  Passenger Information  *" << endl;
-        cout << "***************************" << endl;
-        Passenger *passenger = result->getPassenger();
-        cout << " First name:" << passenger->getFirstName() << endl;
-        cout << " Last name:" << passenger->getLastName() << endl;
-        cout << " Date of Birth:" << passenger->getDateOfBirth() << endl;
-        cout << " Gender:" << passenger->getGender()<< endl;
-        cout << " Phone No:" << passenger->getPhone() << endl;
-        cout << " Email Address:" << passenger->getEmail() << endl;
-        cout << " Passport Id:" << passenger->getPassportId() << endl << endl;
+		cout << "***************************" << endl;
+		cout << "*  Passenger Information  *" << endl;
+		cout << "***************************" << endl;
+		Passenger *passenger = result->getPassenger();
+		cout << " First name:" << passenger->getFirstName() << endl;
+		cout << " Last name:" << passenger->getLastName() << endl;
+		cout << " Date of Birth:" << passenger->getDateOfBirth() << endl;
+		cout << " Gender:" << passenger->getGender() << endl;
+		cout << " Phone No:" << passenger->getPhone() << endl;
+		cout << " Email Address:" << passenger->getEmail() << endl;
+		cout << " Passport Id:" << passenger->getPassportId() << endl << endl;
 
-    }
+	}
 	cout << "Press '1' to return back to the menu or press any key to exit:" << endl;
 	cin >> b;
 	if (b == 1)
