@@ -408,11 +408,12 @@ void UserRegistration(Flight* flightWithFNumber,string class1)
 		}
 
 		Ticket* ticket = flightWithFNumber->ReserveSeat(class2, passenger);
-		
+//		cout << "alloted ticket number:" <<ticket->getTicketNumber;
 			//check if the reservation was made - if the flight is null then there are no more seats available, and ticket will be null
-		if (ticket == NULL)
+		if (ticket == nullptr)
 		{
 			delete passenger;
+			cout << "We are sorry Flight you have selected has no available aeat.Please search again." << endl;
 			// ToDo : how to write that the plane is full. This can be checked before asking the passenger for details
 		}
 		else
@@ -421,7 +422,7 @@ void UserRegistration(Flight* flightWithFNumber,string class1)
 			cout << "Thankyou for your booking." << endl;
 		}
 		Sleep(10);
-		system("cls");
+	//	system("cls");
 		menu();
 	}
 }
