@@ -226,14 +226,16 @@ void Reserve()
 
 	cout << "Book a Flight \n\n" << endl;
 
-	cout << "Current Available Options: NY, Dallas, SEA, Paris \n";
+	//"SEATTLE", "PORTLAND", "LOSANGELES", "SANDIEGO", "CHICAGO", "NEWYORK", "WASHINGTONDC", "ATLANTA"
+	cout << "Current Available Options: PORTLAND, LOSANGELES, SANDIEGO, CHICAGO, NEWYORK, WASHINGTONDC, ATLANTA \n";
 	cout << "*************************************************** \n" << endl;
 
 	cout << "Enter origin:";
 	cin >> origin;
 	origin = ToUpperCase(origin);
 
-	while ((origin != "NY") && (origin != "DALLAS") && (origin != "SEA") && (origin != "PARIS"))
+	while ((origin != "SEATTLE") && (origin != "PORTLAND") && (origin != "LOSANGELES") && (origin != "SANDIEGO") 
+	       && (origin != "CHICAGO") && (origin != "NEWYORK") && (origin != "WASHINGTONDC") && (origin != "ATLANTA"))
 	{
 		cout << "Invalid origin. Enter again:";
 		cin >> origin;
