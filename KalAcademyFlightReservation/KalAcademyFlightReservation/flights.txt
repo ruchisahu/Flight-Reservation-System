@@ -2,6 +2,12 @@ LastTicketNumber;2
 Flight;650;Delta;10/9/2018 7:00;10/9/2018 12:00;LOSANGELES;NEWYORK;
 SeatDefinition;1;10;5;100;2;
 SeatDefinition;11;30;5;10;1;
+Flight;666;Delta;10/9/2018 7:00;10/9/2018 12:00;LOSANGELES;NEWYORK;
+SeatDefinition;1;10;5;100;2;
+SeatDefinition;11;30;5;10;1;
+Flight;9000;Delta;10/9/2018 7:00;10/9/2018 12:00;LOSANGELES;NEWYORK;
+SeatDefinition;1;10;5;100;2;
+SeatDefinition;11;30;5;10;1;
 Flight;186;Delta;10/13/2018 7:00;10/13/2018 2:00;NEWYORK;LOSANGELES;
 SeatDefinition;1;10;5;100;2;
 SeatDefinition;11;30;5;10;1;
