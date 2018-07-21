@@ -15,9 +15,9 @@ Clone this project using your preferred Github repository management tool and op
 * Clone this project to your local machine.
 * Open this project in Visual Studio, build the solution, and then run the application in either debug or release mode.
 
-## Deployment
+## Executing Application
 
-This feature is not currently available!
+* When reserving a seat, please consult the (flights.txt)[/KalAcademyFlightReservation/KalAcademyFlightReservation/flights.txt] file and pick one of the flights from this list.
 
 ## Built With
 
