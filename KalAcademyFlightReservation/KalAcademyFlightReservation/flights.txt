@@ -1,4 +1,4 @@
-LastTicketNumber;8
+LastTicketNumber;9
 Flight;123D;Delta Airline;7/17/2018 8:00;7/17/2018 12:00;NY;DALLAS;
 SeatDefinition;1;10;5;100;2;
 SeatDefinition;11;30;5;10;1;
@@ -17,6 +17,9 @@ Ticket;7;
 TicketSeat;11;2;10;1;
 TicketPassenger;e;e;e;e;e;e;w;23;
 Ticket;8;
+TicketSeat;1;4;100;2;
+TicketPassenger;r;r;e;r;r;r;q;45;
+Ticket;9;
 Flight;DL111;Delta Airline;7/17/2018 8:00;7/17/2018 12:00;SEA;PARIS;
 SeatDefinition;1;2;2;100;2;
 SeatDefinition;3;4;2;10;1;
@@ -44,6 +47,9 @@ SeatDefinition;21;100;3;10;1;
 Flight;AA223;American Airline;7/19/2018 20:00;7/19/2018 22:00;SEA;NY;
 SeatDefinition;1;20;3;100;2;
 SeatDefinition;21;100;3;10;1;
+Flight;123D;DELTA AIRLINE;7/17/2018_8:00:00;7/17/2018_11:00:00;NY;DALLAS;
+Flight;DL112;DELTA AIRLINE;7/29/2018_1:00:00;7/13/2018_5:00:00;SEA;DALLAS;
+Flight;DL111;DELTA AIRLINE;7/29/2018_1:00:00;7/13/2018_5:00:00;SEA;NY;
 Flight;123D;DELTA AIRLINE;7/17/2018_8:00:00;7/17/2018_11:00:00;NY;DALLAS;
 Flight;DL112;DELTA AIRLINE;7/29/2018_1:00:00;7/13/2018_5:00:00;SEA;DALLAS;
 Flight;DL111;DELTA AIRLINE;7/29/2018_1:00:00;7/13/2018_5:00:00;SEA;NY;

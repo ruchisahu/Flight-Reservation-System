@@ -408,7 +408,7 @@ void UserRegistration(Flight* flightWithFNumber,string class1)
 		}
 
 		Ticket* ticket = flightWithFNumber->ReserveSeat(class2, passenger);
-//		cout << "alloted ticket number:" <<ticket->getTicketNumber;
+		
 			//check if the reservation was made - if the flight is null then there are no more seats available, and ticket will be null
 		if (ticket == nullptr)
 		{
@@ -418,7 +418,9 @@ void UserRegistration(Flight* flightWithFNumber,string class1)
 		}
 		else
 		{
+			
 			dataAccess.SaveFlights();
+			cout << "Alloted ticket number is:" << ticket->getTicketNumber() <<endl;
 			cout << "Thankyou for your booking." << endl;
 		}
 		Sleep(10);
