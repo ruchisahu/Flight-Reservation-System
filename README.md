@@ -17,7 +17,7 @@ Clone this project using your preferred Github repository management tool and op
 
 ## Executing Application
 
-* When reserving a seat, please consult the (flights.txt)[/KalAcademyFlightReservation/KalAcademyFlightReservation/flights.txt] file and pick one of the flights from this list.
+* When reserving a seat, please consult the [flights.txt](/KalAcademyFlightReservation/KalAcademyFlightReservation/flights.txt) file and pick one of the flights from this list.
 
 ## Built With
 
