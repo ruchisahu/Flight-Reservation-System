@@ -437,7 +437,7 @@ void flightSchedule()
 	system("cls");
 	cout << "Flight Schedule:" << endl;
 	cout << "**************************" << endl;
-	cout << "Example string: NY, Dallas, 7/17/2018 8:00" << endl;  
+	cout << "Example string: LOSANGELES, NEWYORK, 10/9/2018 7:00" << endl;  
 	cout << "Enter Origin:";
 	cin >> origin;
 	origin = ToUpperCase(origin);
