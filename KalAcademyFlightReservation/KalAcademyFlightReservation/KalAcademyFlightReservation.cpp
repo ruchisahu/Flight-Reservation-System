@@ -434,7 +434,7 @@ void flightSchedule()
 	system("cls");
 	cout << "Flight Schedule:" << endl;
 	cout << "**************************" << endl;
-	cout << "Example string: NY, Dallas, 7/17/2018 8:00:00" << endl;  
+	cout << "Example string: NY, Dallas, 7/17/2018 8:00" << endl;  
 	cout << "Enter Origin:";
 	cin >> origin;
 	origin = ToUpperCase(origin);
@@ -445,7 +445,7 @@ void flightSchedule()
 
 	cin.ignore();
 
-	cout << "Enter Valid DateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018 8:00:00):";
+	cout << "Enter Valid DateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018 8:00):";
 	getline(cin, date);
 	cout << "**********************" << endl;
 
