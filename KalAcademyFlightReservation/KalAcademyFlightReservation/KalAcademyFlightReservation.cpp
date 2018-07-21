@@ -18,8 +18,8 @@ int selection = 0, b, num, k;
 string origin, TicketNo;
 string destination, flightNumber, passportId, flight, dateOfBirth, gender, address, phone, email, date;
 
-int traveler = 0, ticket;
-string class1 = "ec";
+int traveler = 0;
+string class1;
 char op = '0';
 bool flag;
 void menu();
@@ -45,7 +45,7 @@ string ToUpperCase(string text)
 	}
 	return text;
 }
-
+//position
 void gotoxy(int x, int y)
 {
 	COORD c = { x, y };
@@ -68,7 +68,7 @@ void date_times()
 }
 
 //test dataset
-void TestDataAccess()
+/*void TestDataAccess()
 {
 	DataAccess dataAccess;
 	vector<Flight*>& flights = dataAccess.getFlights();
@@ -141,7 +141,7 @@ void TestDataAccess()
 	//Passenger* passenger = dataAccess.GetPassengerInformation("passportId1");
 	//passenger = dataAccess.GetPassengerInformation("passportId111");
 }
-
+*/
 int main()
 {
 	//TestDataAccess();
@@ -171,7 +171,6 @@ int main()
 	//SetConsoleTextAttribute(hConsole, k);
 	gotoxy(35, 5);
 	cout << " Welcome to Flight Reservation System:" << endl;
-	//system("color cc");
 	gotoxy(35, 6);
 	cout << "........................................" << endl;
 	cout << endl;
@@ -187,7 +186,7 @@ void menu()
 	selection = 0;
 	cout << " Please choose from the following options - \n";
 	cout << "\n\n";
-	cout << " 1. Reserve a seat.\n";
+	cout << " 1. Reserve a Seat.\n";
 	cout << " 2. Flight Schedule.\n";
 	cout << " 3. Display Passenger Information.\n";
 	cout << " 4. Flight Detail.\n";
@@ -221,8 +220,10 @@ void menu()
 //Reserve flight
 void Reserve()
 {
+	int k1,k2;
 	system("cls");
 	gotoxy(40, 5);
+
 	cout << "Book a Flight \n\n" << endl;
 
 	cout << "Current Available Options: NY, Dallas, SEA, Paris \n";
@@ -252,10 +253,10 @@ void Reserve()
 	cin.ignore();
 
 	cout << "Enter departure date:";
+	cout << "Example: 7/17/2018 8:00" << endl;
 	getline(cin, date);
 
-	//	cout << " Please enter number of travelers: "<<endl;
-	//	cin >> traveler;
+	
 	cout << "Enter class (Business or Economy):";
 	cin >> class1;
 	class1 = ToUpperCase(class1);
@@ -267,12 +268,22 @@ void Reserve()
 	}
 	cout << "**********************" << endl;
 
-	cout << "list of avalaible flights " << endl;
+	cout << "List of avalaible flights " << endl;
 	vector<Flight*> flights = dataAccess.GetFlightSchedule(origin, destination, date);
 	//******************************
 	if (flights.size() == 0)
 	{
-		return;  // TO DO: write some messages in case where no flights are found and return to Main Menu
+		cout << "Error:No flights found" << endl;
+		cout << "Press '1' to return back to the menu or press any key to exit:" << endl;
+		cin >> k2;
+		if (k2 == 1)
+		{
+			system("cls");
+			menu();
+		}
+		else
+			Exit();
+		return;  
 	}
 	int num = 0;
 	for (vector<Flight*>::const_iterator iterator = flights.begin(); iterator != flights.end(); ++iterator)
@@ -295,7 +306,7 @@ void Reserve()
 		num++;
 	}
 
-	cout << "which flight you want to book? Enter valid flight Number:" <<endl;
+	cout << "Which flight you want to book? Enter valid flight Number:" <<endl;
 	cin >> flightNumber;
 
 	//Find the flight with this flight number
@@ -311,22 +322,35 @@ void Reserve()
 	}
 	if (flightWithFNumber == nullptr)
 	{
-		return; // TO DO: write some messages in case where no flights are found and return to Main Menu 
-	}
-	cout << "Continue? (Y/N):";
-	cin >> op;
+		cout << "Error:No Matching Flights Found "<<endl;
+		cout << "Press '1' to return back to the menu or press any key to exit:" << endl;
+		cin >> k1;
+		if (k1 == 1)
+		{
+			system("cls");
+			menu();
+		}
+		else
+			Exit();
 
-	if (op == 'Y' || op == 'y')
-	{
-		system("cls");
-		UserRegistration(flightWithFNumber,class1);
-	}
-	else if (op == 'N' || op == 'n')
-	{
-		menu();
 	}
 	else
-		Exit();
+	{
+		cout << "Continue? (Y/N):";
+		cin >> op;
+
+		if (op == 'Y' || op == 'y')
+		{
+			system("cls");
+			UserRegistration(flightWithFNumber, class1);
+		}
+		else if (op == 'N' || op == 'n')
+		{
+			menu();
+		}
+		else
+			Exit();
+	}
 }
 
 //User Registration required by reseve function.
@@ -335,8 +359,7 @@ void UserRegistration(Flight* flightWithFNumber,string class1)
 	string Fname, Lname;
 	string passportId;
 	int phoneno;
-	//Flight* flight = new Flight("DL111", "DELTA AIRLINE", "7/13/2018_8:00:00", "7/13/2018_12:00:00", "NY", "DALLAS");
-
+	
 	cout << "Enter First Name:";
 	cin >> Fname;
 
@@ -370,13 +393,7 @@ void UserRegistration(Flight* flightWithFNumber,string class1)
 	}
 	else
 	{
-		cout << "USERNAME AND PASSPORT SET." << endl;
-		//vector<SeatDefinition*> seatDefinitions;
-		//seatDefinitions.push_back(new SeatDefinition(1, 10, 5, 100, SeatCategory::Business));
-		//seatDefinitions.push_back(new SeatDefinition(11, 30, 5, 10, SeatCategory::Economy));
-		//flight->setSeatDefinitions(seatDefinitions);
-		//dataAccess.SaveFlights();
-		//TOdo:reserve a seat
+	
 		Passenger* passenger = new Passenger(Fname, Lname, dateOfBirth, gender, address, phone, email, passportId);
 
 		SeatCategory class2;
@@ -391,27 +408,23 @@ void UserRegistration(Flight* flightWithFNumber,string class1)
 		}
 
 		Ticket* ticket = flightWithFNumber->ReserveSeat(class2, passenger);
-		/*	if (class1 == "Business")
-			{
-				Ticket* ticket = flight->ReserveSeat(SeatCategory::Business, passenger);
-			}
-			if (class1 == "Economy")
-			{
-				Ticket* ticket = flight->ReserveSeat(SeatCategory::Economy, passenger);
-			}
-			*/
+		
 			//check if the reservation was made - if the flight is null then there are no more seats available, and ticket will be null
-		if (ticket == NULL)
+		if (ticket == nullptr)
 		{
 			delete passenger;
+			cout << "We are sorry Flight you have selected has no available aeat.Please search again." << endl;
 			// ToDo : how to write that the plane is full. This can be checked before asking the passenger for details
 		}
 		else
 		{
+			
 			dataAccess.SaveFlights();
+			cout << "Alloted ticket number is:" << ticket->getTicketNumber() <<endl;
+			cout << "Thankyou for your booking." << endl;
 		}
-		Sleep(4);
-		system("cls");
+		Sleep(10);
+	//	system("cls");
 		menu();
 	}
 }
@@ -421,7 +434,7 @@ void flightSchedule()
 	system("cls");
 	cout << "Flight Schedule:" << endl;
 	cout << "**************************" << endl;
-	cout << "Example string: NY, Dallas, 7/17/2018 8:00:00" << endl;   //cout break the string if you use space in between so I use "_" to connect date and string.
+	cout << "Example string: NY, Dallas, 7/17/2018 8:00" << endl;  
 	cout << "Enter Origin:";
 	cin >> origin;
 	origin = ToUpperCase(origin);
@@ -432,14 +445,14 @@ void flightSchedule()
 
 	cin.ignore();
 
-	cout << "Enter Valid DateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018_8:00:00):";
+	cout << "Enter Valid DateTime\n(format: mm/dd/yyy_hh:mm:ss for example 7/17/2018 8:00):";
 	getline(cin, date);
 	cout << "**********************" << endl;
 
 	cout << "List Of All Flights \n";
 	cout << "**************************" << endl;
 	DataAccess dataAccess;
-	//vector<Flight*>& flights = dataAccess.getFlights();
+	
 
 	vector<Flight*> myFlights = dataAccess.GetFlightSchedule(origin, destination, date);
 	cout << "Flight Detail:" << endl;
