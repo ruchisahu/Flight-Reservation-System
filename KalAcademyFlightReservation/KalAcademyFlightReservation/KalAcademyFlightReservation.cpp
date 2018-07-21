@@ -245,7 +245,8 @@ void Reserve()
 	cout << "Enter destination:" << endl;
 	cin >> destination;
 	destination = ToUpperCase(destination);
-	while ((destination != "NY") && (destination != "DALLAS") && (destination != "SEA") && (destination != "PARIS"))
+	while ((origin != "SEATTLE") && (origin != "PORTLAND") && (origin != "LOSANGELES") && (origin != "SANDIEGO")
+		&& (origin != "CHICAGO") && (origin != "NEWYORK") && (origin != "WASHINGTONDC") && (origin != "ATLANTA"))
 	{
 		cout << "Invalid destination. Enter again:";
 		cin >> destination;
